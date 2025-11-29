@@ -491,6 +491,10 @@
             cursor: pointer;
             box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
             transition: all 0.3s;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
         }
 
         .jump-button:hover {
@@ -1592,11 +1596,15 @@
         jumpBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             startCharging();
-        });
+        }, { passive: false });
         jumpBtn.addEventListener('touchend', (e) => {
             e.preventDefault();
             stopCharging();
-        });
+        }, { passive: false });
+        jumpBtn.addEventListener('touchcancel', (e) => {
+            e.preventDefault();
+            stopCharging();
+        }, { passive: false });
 
         continueBtn.addEventListener('click', continueGame);
         overlay.addEventListener('click', continueGame);
