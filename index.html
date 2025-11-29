@@ -97,7 +97,7 @@
 
         .game-world {
             position: absolute;
-            width: 200%;
+            width: 2500px;
             height: 100%;
             transition: transform 0.3s ease-out;
         }
@@ -105,7 +105,7 @@
         .ground {
             position: absolute;
             bottom: 0;
-            width: 100%;
+            width: 2500px;
             height: 60px;
             background: linear-gradient(180deg, #8B4513, #654321);
         }
@@ -113,7 +113,7 @@
         .grass {
             position: absolute;
             bottom: 52px;
-            width: 100%;
+            width: 2500px;
             height: 25px;
             background: repeating-linear-gradient(
                 90deg,
@@ -1199,6 +1199,15 @@
                 <div class="distance-marker" style="left: 500px;">15m</div>
                 <div class="distance-marker" style="left: 650px;">20m</div>
                 <div class="distance-marker" style="left: 800px;">25m</div>
+                <div class="distance-marker" style="left: 950px;">30m</div>
+                <div class="distance-marker" style="left: 1100px;">35m</div>
+                <div class="distance-marker" style="left: 1250px;">40m</div>
+                <div class="distance-marker" style="left: 1400px;">45m</div>
+                <div class="distance-marker" style="left: 1550px;">50m</div>
+                <div class="distance-marker" style="left: 1700px;">55m</div>
+                <div class="distance-marker" style="left: 1850px;">60m</div>
+                <div class="distance-marker" style="left: 2000px;">65m</div>
+                <div class="distance-marker" style="left: 2150px;">70m</div>
             </div>
         </div>
 
@@ -1487,8 +1496,10 @@
             const areaWidth = gameArea.offsetWidth;
             const frogScreenPos = frogX + 50; // frog position from left edge
 
-            // Start following when frog is past 40% of screen
-            const followThreshold = areaWidth * 0.4;
+            // On mobile (narrow screens), start following at 40% of screen
+            // On desktop, start following at 70% of screen
+            const isMobile = areaWidth < 600;
+            const followThreshold = isMobile ? areaWidth * 0.4 : areaWidth * 0.7;
 
             if (frogScreenPos > followThreshold) {
                 const offset = frogScreenPos - followThreshold;
