@@ -95,6 +95,13 @@
             margin-bottom: 10px;
         }
 
+        .game-world {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            transition: transform 0.3s ease-out;
+        }
+
         .ground {
             position: absolute;
             bottom: 0;
@@ -1150,47 +1157,49 @@
                 </div>
             </div>
 
-            <div class="grass"></div>
-            <div class="ground"></div>
+            <div class="game-world" id="game-world">
+                <div class="grass"></div>
+                <div class="ground"></div>
 
-            <div class="frog skin-default" id="frog">
-                <div class="frog-body">
-                    <!-- Accessories -->
-                    <div class="halo"></div>
-                    <div class="crown"></div>
-                    <div class="bow"></div>
-                    <div class="moon"></div>
-                    <div class="sparkles">
-                        <div class="sparkle" style="top: -5px; left: 5px;"></div>
-                        <div class="sparkle" style="top: 15px; right: -5px; animation-delay: 0.4s;"></div>
-                        <div class="sparkle" style="bottom: 5px; left: 30px; animation-delay: 0.8s;"></div>
-                        <div class="sparkle" style="top: 25px; left: -3px; animation-delay: 1.2s;"></div>
+                <div class="frog skin-default" id="frog">
+                    <div class="frog-body">
+                        <!-- Accessories -->
+                        <div class="halo"></div>
+                        <div class="crown"></div>
+                        <div class="bow"></div>
+                        <div class="moon"></div>
+                        <div class="sparkles">
+                            <div class="sparkle" style="top: -5px; left: 5px;"></div>
+                            <div class="sparkle" style="top: 15px; right: -5px; animation-delay: 0.4s;"></div>
+                            <div class="sparkle" style="bottom: 5px; left: 30px; animation-delay: 0.8s;"></div>
+                            <div class="sparkle" style="top: 25px; left: -3px; animation-delay: 1.2s;"></div>
+                        </div>
+                        <!-- Head with kawaii face -->
+                        <div class="frog-head">
+                            <div class="eye left"></div>
+                            <div class="eye right"></div>
+                            <div class="cheek left"></div>
+                            <div class="cheek right"></div>
+                            <div class="mouth"></div>
+                        </div>
+                        <!-- Chubby body -->
+                        <div class="frog-main">
+                            <div class="belly"></div>
+                        </div>
+                        <!-- Little legs -->
+                        <div class="leg front-left"></div>
+                        <div class="leg front-right"></div>
+                        <div class="leg back-left"></div>
+                        <div class="leg back-right"></div>
                     </div>
-                    <!-- Head with kawaii face -->
-                    <div class="frog-head">
-                        <div class="eye left"></div>
-                        <div class="eye right"></div>
-                        <div class="cheek left"></div>
-                        <div class="cheek right"></div>
-                        <div class="mouth"></div>
-                    </div>
-                    <!-- Chubby body -->
-                    <div class="frog-main">
-                        <div class="belly"></div>
-                    </div>
-                    <!-- Little legs -->
-                    <div class="leg front-left"></div>
-                    <div class="leg front-right"></div>
-                    <div class="leg back-left"></div>
-                    <div class="leg back-right"></div>
                 </div>
-            </div>
 
-            <div class="distance-marker" style="left: 200px;">5m</div>
-            <div class="distance-marker" style="left: 350px;">10m</div>
-            <div class="distance-marker" style="left: 500px;">15m</div>
-            <div class="distance-marker" style="left: 650px;">20m</div>
-            <div class="distance-marker" style="left: 800px;">25m</div>
+                <div class="distance-marker" style="left: 200px;">5m</div>
+                <div class="distance-marker" style="left: 350px;">10m</div>
+                <div class="distance-marker" style="left: 500px;">15m</div>
+                <div class="distance-marker" style="left: 650px;">20m</div>
+                <div class="distance-marker" style="left: 800px;">25m</div>
+            </div>
         </div>
 
         <p class="instructions">Hold the button to charge power, release to jump!</p>
@@ -1246,6 +1255,8 @@
 
         // DOM Elements
         const frog = document.getElementById('frog');
+        const gameWorld = document.getElementById('game-world');
+        const gameArea = document.getElementById('game-area');
         const jumpBtn = document.getElementById('jump-btn');
         const powerBar = document.getElementById('power-bar');
         const powerPercent = document.getElementById('power-percent');
@@ -1471,6 +1482,26 @@
             }
         }
 
+        // Camera follow - keeps frog visible on screen
+        function updateCamera(frogX) {
+            const areaWidth = gameArea.offsetWidth;
+            const frogScreenPos = frogX + 50; // frog position from left edge
+
+            // Start following when frog is past 40% of screen
+            const followThreshold = areaWidth * 0.4;
+
+            if (frogScreenPos > followThreshold) {
+                const offset = frogScreenPos - followThreshold;
+                gameWorld.style.transform = `translateX(-${offset}px)`;
+            } else {
+                gameWorld.style.transform = 'translateX(0)';
+            }
+        }
+
+        function resetCamera() {
+            gameWorld.style.transform = 'translateX(0)';
+        }
+
         // Perform jump
         function performJump() {
             gameState.isJumping = true;
@@ -1489,9 +1520,25 @@
 
             frog.classList.add('jumping');
 
+            // Animate camera to follow frog during jump
+            const jumpDuration = 1000;
+            const startTime = Date.now();
+            const animateCamera = () => {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / jumpDuration, 1);
+                const currentDistance = pixelDistance * progress;
+                updateCamera(currentDistance);
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateCamera);
+                }
+            };
+            animateCamera();
+
             setTimeout(() => {
                 frog.classList.remove('jumping');
                 frog.style.left = `${50 + pixelDistance}px`;
+                updateCamera(pixelDistance);
 
                 // Calculate XP
                 const xpGained = Math.floor(totalDistance * 5);
@@ -1564,8 +1611,9 @@
             overlay.style.display = 'none';
             resultPopup.style.display = 'none';
 
-            // Reset frog position
+            // Reset frog position and camera
             frog.style.left = '50px';
+            resetCamera();
             powerBar.style.width = '0%';
             powerPercent.textContent = '0';
             gameState.power = 0;
