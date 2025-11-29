@@ -97,126 +97,31 @@
 
         .game-world {
             position: absolute;
-            width: 2000px;
+            width: 200%;
             height: 100%;
             transition: transform 0.3s ease-out;
         }
 
-        /* Terrain zones - each 30px per meter */
-        .terrain {
+        .ground {
             position: absolute;
             bottom: 0;
-            height: 60px;
-            display: flex;
-        }
-
-        /* Zone 1: 0-20m (0-650px from frog start at 50px) - Normal grassland */
-        .terrain-grass {
-            position: absolute;
-            left: 0;
-            width: 650px;
+            width: 100%;
             height: 60px;
             background: linear-gradient(180deg, #8B4513, #654321);
         }
-        .terrain-grass::before {
-            content: '';
-            position: absolute;
-            top: -17px;
-            width: 100%;
-            height: 25px;
-            background: repeating-linear-gradient(90deg, #228B22 0px, #32CD32 10px, #228B22 20px);
-            border-radius: 20px 20px 0 0;
-        }
-
-        /* Zone 2: 20-30m (650-950px) - Sandy beach */
-        .terrain-beach {
-            position: absolute;
-            left: 650px;
-            width: 300px;
-            height: 60px;
-            background: linear-gradient(180deg, #F4D03F, #D4AC0D);
-        }
-        .terrain-beach::before {
-            content: '';
-            position: absolute;
-            top: -17px;
-            width: 100%;
-            height: 25px;
-            background: repeating-linear-gradient(90deg, #F5D76E 0px, #F7DC6F 15px, #F5D76E 30px);
-            border-radius: 20px 20px 0 0;
-        }
-
-        /* Zone 3: 30-40m (950-1250px) - Rocky mountains */
-        .terrain-rocky {
-            position: absolute;
-            left: 950px;
-            width: 300px;
-            height: 60px;
-            background: linear-gradient(180deg, #7B7D7D, #515A5A);
-        }
-        .terrain-rocky::before {
-            content: '';
-            position: absolute;
-            top: -17px;
-            width: 100%;
-            height: 25px;
-            background: repeating-linear-gradient(90deg, #839192 0px, #6E7B7B 8px, #7B8A8B 16px, #616A6B 24px);
-            border-radius: 15px 15px 0 0;
-        }
-
-        /* Zone 4: 40-50m (1250-1550px) - Magical crystal cave */
-        .terrain-crystal {
-            position: absolute;
-            left: 1250px;
-            width: 300px;
-            height: 60px;
-            background: linear-gradient(180deg, #8E44AD, #5B2C6F);
-        }
-        .terrain-crystal::before {
-            content: '';
-            position: absolute;
-            top: -17px;
-            width: 100%;
-            height: 25px;
-            background: repeating-linear-gradient(90deg, #A569BD 0px, #D7BDE2 5px, #8E44AD 10px, #C39BD3 15px);
-            border-radius: 15px 15px 0 0;
-            animation: crystal-shimmer 2s ease-in-out infinite;
-        }
-        @keyframes crystal-shimmer {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.3); }
-        }
-
-        /* Zone 5: 50m+ (1550px+) - Rainbow cloud heaven */
-        .terrain-heaven {
-            position: absolute;
-            left: 1550px;
-            width: 500px;
-            height: 60px;
-            background: linear-gradient(180deg, #FFB6C1, #FFF0F5);
-        }
-        .terrain-heaven::before {
-            content: '';
-            position: absolute;
-            top: -17px;
-            width: 100%;
-            height: 25px;
-            background: linear-gradient(90deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #E0BBE4, #FFB3BA);
-            background-size: 200% 100%;
-            border-radius: 20px 20px 0 0;
-            animation: rainbow-scroll 3s linear infinite;
-        }
-        @keyframes rainbow-scroll {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-
-        .ground {
-            display: none;
-        }
 
         .grass {
-            display: none;
+            position: absolute;
+            bottom: 52px;
+            width: 100%;
+            height: 25px;
+            background: repeating-linear-gradient(
+                90deg,
+                #228B22 0px,
+                #32CD32 10px,
+                #228B22 20px
+            );
+            border-radius: 50% 50% 0 0;
         }
 
         .frog {
@@ -1253,12 +1158,8 @@
             </div>
 
             <div class="game-world" id="game-world">
-                <!-- Terrain zones -->
-                <div class="terrain-grass"></div>
-                <div class="terrain-beach"></div>
-                <div class="terrain-rocky"></div>
-                <div class="terrain-crystal"></div>
-                <div class="terrain-heaven"></div>
+                <div class="grass"></div>
+                <div class="ground"></div>
 
                 <div class="frog skin-default" id="frog">
                     <div class="frog-body">
@@ -1296,14 +1197,8 @@
                 <div class="distance-marker" style="left: 200px;">5m</div>
                 <div class="distance-marker" style="left: 350px;">10m</div>
                 <div class="distance-marker" style="left: 500px;">15m</div>
-                <div class="distance-marker" style="left: 650px;">20m 🏖️</div>
+                <div class="distance-marker" style="left: 650px;">20m</div>
                 <div class="distance-marker" style="left: 800px;">25m</div>
-                <div class="distance-marker" style="left: 950px;">30m 🪨</div>
-                <div class="distance-marker" style="left: 1100px;">35m</div>
-                <div class="distance-marker" style="left: 1250px;">40m 💎</div>
-                <div class="distance-marker" style="left: 1400px;">45m</div>
-                <div class="distance-marker" style="left: 1550px;">50m 🌈</div>
-                <div class="distance-marker" style="left: 1700px;">55m</div>
             </div>
         </div>
 
@@ -1592,10 +1487,8 @@
             const areaWidth = gameArea.offsetWidth;
             const frogScreenPos = frogX + 50; // frog position from left edge
 
-            // On mobile (narrow screens), start following at 40% of screen
-            // On desktop, start following when frog would go past 70% of screen
-            const isMobile = areaWidth < 600;
-            const followThreshold = isMobile ? areaWidth * 0.4 : areaWidth * 0.7;
+            // Start following when frog is past 40% of screen
+            const followThreshold = areaWidth * 0.4;
 
             if (frogScreenPos > followThreshold) {
                 const offset = frogScreenPos - followThreshold;
