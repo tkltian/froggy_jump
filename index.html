@@ -671,23 +671,66 @@
         .labubu-reveal-content {
             text-align: center;
             color: white;
+            background: rgba(0,0,0,0.6);
+            padding: 30px 50px;
+            border-radius: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
         }
 
         .labubu-reveal-title {
             font-size: 1.5em;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .labubu-reveal-monster {
-            transform: scale(3);
-            margin: 40px auto;
+            transform: scale(4);
+            margin: 50px auto;
+            width: 30px;
+            height: 35px;
+            position: relative;
+            display: inline-block;
         }
 
         .labubu-reveal-bonus {
-            font-size: 1.8em;
+            font-size: 2em;
             color: #FFD700;
-            margin-top: 20px;
+            margin-top: 30px;
             animation: bonusPop 0.5s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .labubu-reveal-hint {
+            font-size: 0.8em;
+            color: rgba(255,255,255,0.6);
+            margin-top: 15px;
+        }
+
+        /* Labubu game hint */
+        .labubu-hint {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FFB6C1, #FF91A4);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 150;
+            animation: hintBounce 2s ease-in-out infinite;
+        }
+
+        .labubu-hint.show {
+            display: block;
+        }
+
+        @keyframes hintBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
         }
 
         @keyframes bonusPop {
@@ -1464,7 +1507,13 @@
             <div class="labubu-reveal-title" id="labubu-reveal-title">You found a Labubu!</div>
             <div class="labubu-reveal-monster" id="labubu-reveal-monster"></div>
             <div class="labubu-reveal-bonus" id="labubu-reveal-bonus">+50 XP Bonus!</div>
+            <div class="labubu-reveal-hint">(tap to continue)</div>
         </div>
+    </div>
+
+    <!-- Labubu hint tooltip -->
+    <div class="labubu-hint" id="labubu-hint">
+        🎁 Aim for the Labubu toys for bonus XP!
     </div>
 
     <script>
@@ -1531,9 +1580,11 @@
         const labubuRevealTitle = document.getElementById('labubu-reveal-title');
         const labubuRevealMonster = document.getElementById('labubu-reveal-monster');
         const labubuRevealBonus = document.getElementById('labubu-reveal-bonus');
+        const labubuHint = document.getElementById('labubu-hint');
 
         // Labubu state
         let activeLabubus = [];
+        let hasShownLabubuHint = false;
         const LABUBU_CATCH_DISTANCE = 50; // pixels - how close frog needs to land
         const LABUBU_REGULAR_BONUS = 50;
         const LABUBU_LIMITED_BONUS = 500;
@@ -1552,6 +1603,24 @@
                     <div class="labubu-body-main"></div>
                 </div>
             `;
+        }
+
+        // Show Labubu hint
+        function showLabubuHintOnce() {
+            if (hasShownLabubuHint) return;
+            hasShownLabubuHint = true;
+
+            labubuHint.classList.add('show');
+
+            // Auto-hide after 4 seconds
+            setTimeout(() => {
+                labubuHint.classList.remove('show');
+            }, 4000);
+        }
+
+        // Hide Labubu hint immediately
+        function hideLabubuHint() {
+            labubuHint.classList.remove('show');
         }
 
         // Spawn Labubu toys
@@ -1583,6 +1652,9 @@
                     collected: false
                 });
             }
+
+            // Show hint on first spawn
+            showLabubuHintOnce();
         }
 
         // Check if frog landed near any Labubu
@@ -1610,36 +1682,60 @@
             const isLimited = labubu.isLimited;
             const bonus = isLimited ? LABUBU_LIMITED_BONUS : LABUBU_REGULAR_BONUS;
 
-            // Check if Labubu was off-screen
+            // Check if Labubu was off-screen (beyond current camera view)
             const areaWidth = gameArea.offsetWidth;
-            const isOffScreen = labubu.position > areaWidth;
+            const currentTransform = gameWorld.style.transform;
+            const currentOffset = currentTransform ? parseFloat(currentTransform.replace('translateX(-', '').replace('px)', '')) || 0 : 0;
+            const visibleEnd = areaWidth + currentOffset;
+            const isOffScreen = labubu.position > visibleEnd - 50;
+
+            const showRevealPopup = () => {
+                // Set reveal content
+                if (isLimited) {
+                    labubuRevealTitle.innerHTML = '🌟 SECRET EDITION! 🌟<br>Black & Gold Labubu!';
+                    labubuRevealTitle.style.color = 'gold';
+                } else {
+                    labubuRevealTitle.innerHTML = '🎉 You found a Labubu! 🎉';
+                    labubuRevealTitle.style.color = 'white';
+                }
+
+                // Create the monster HTML with proper structure
+                const monsterClass = isLimited ? 'labubu-limited' : 'labubu-regular';
+                labubuRevealMonster.className = `labubu-reveal-monster ${monsterClass}`;
+                labubuRevealMonster.innerHTML = createLabubuHTML(isLimited);
+
+                labubuRevealBonus.textContent = `+${bonus} XP Bonus!`;
+
+                // Show reveal
+                labubuReveal.classList.add('active');
+
+                // Click to close early
+                const closeReveal = () => {
+                    labubuReveal.classList.remove('active');
+                    labubuReveal.removeEventListener('click', closeReveal);
+                    if (callback) callback(bonus);
+                };
+
+                // Auto-close after delay or on click
+                labubuReveal.addEventListener('click', closeReveal);
+                setTimeout(() => {
+                    if (labubuReveal.classList.contains('active')) {
+                        closeReveal();
+                    }
+                }, isLimited ? 2500 : 1500);
+            };
 
             if (isOffScreen) {
-                // Pan camera to show the Labubu first
-                updateCamera(labubu.position - 50);
-            }
+                // Pan camera to show the Labubu first, then show popup
+                const targetOffset = labubu.position - areaWidth * 0.5;
+                gameWorld.style.transform = `translateX(-${Math.max(0, targetOffset)}px)`;
 
-            // Set reveal content
-            if (isLimited) {
-                labubuRevealTitle.innerHTML = '🌟 SECRET EDITION! 🌟<br>Black & Gold Labubu!';
-                labubuRevealTitle.style.color = 'gold';
+                // Wait for camera pan, then show reveal
+                setTimeout(showRevealPopup, 400);
             } else {
-                labubuRevealTitle.innerHTML = '🎉 You found a Labubu! 🎉';
-                labubuRevealTitle.style.color = 'white';
+                // Show reveal immediately
+                showRevealPopup();
             }
-
-            labubuRevealMonster.innerHTML = createLabubuHTML(isLimited);
-            labubuRevealMonster.className = `labubu-reveal-monster ${isLimited ? 'labubu-limited' : 'labubu-regular'}`;
-            labubuRevealBonus.textContent = `+${bonus} XP Bonus!`;
-
-            // Show reveal
-            labubuReveal.classList.add('active');
-
-            // Auto-close after delay
-            setTimeout(() => {
-                labubuReveal.classList.remove('active');
-                if (callback) callback(bonus);
-            }, isLimited ? 2500 : 1500);
         }
 
         // Calculate XP needed for level
@@ -1806,6 +1902,9 @@
             gameState.isCharging = true;
             gameState.power = 0;
 
+            // Hide Labubu hint when user starts playing
+            hideLabubuHint();
+
             chargeInterval = setInterval(() => {
                 gameState.power = Math.min(100, gameState.power + 2);
                 powerBar.style.width = gameState.power + '%';
@@ -1823,20 +1922,19 @@
             }
         }
 
-        // Random distance multiplier - usually consistent, occasionally wild
+        // Random distance multiplier using Box-Muller for normal distribution
+        // Mean = 1.0, small standard deviation for mostly consistent jumps
         function getRandomJumpMultiplier() {
-            const roll = Math.random();
+            // Box-Muller transform for normal distribution
+            const u1 = Math.random();
+            const u2 = Math.random();
+            const normalRandom = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
 
-            if (roll < 0.85) {
-                // 85% of the time: small variation (0.9 to 1.1)
-                return 0.9 + Math.random() * 0.2;
-            } else if (roll < 0.925) {
-                // 7.5% of the time: jump much shorter (0.4 to 0.7)
-                return 0.4 + Math.random() * 0.3;
-            } else {
-                // 7.5% of the time: jump much farther (1.4 to 1.8)
-                return 1.4 + Math.random() * 0.4;
-            }
+            // Mean 1.0, standard deviation 0.08 (so ~95% of jumps are within ±16%)
+            const multiplier = 1.0 + normalRandom * 0.08;
+
+            // Clamp to reasonable range (0.7 to 1.3)
+            return Math.max(0.7, Math.min(1.3, multiplier));
         }
 
         // Camera follow - keeps frog visible on screen
