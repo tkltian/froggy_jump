@@ -12,10 +12,12 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Chalkboard', cursive;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(180deg, #87CEEB 0%, #98FB98 100%);
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .game-container {
@@ -853,6 +855,215 @@
             background: rgba(255, 165, 0, 0.9);
             animation: pulse 0.5s ease-in-out infinite alternate;
         }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 600px) {
+            .game-container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 15px;
+                border-radius: 15px;
+                margin-bottom: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .stats {
+                gap: 8px;
+            }
+
+            .stat-box {
+                padding: 8px 12px;
+                font-size: 0.85em;
+                border-radius: 10px;
+            }
+
+            .game-area {
+                height: 300px;
+                border-radius: 15px;
+                margin-bottom: 15px;
+            }
+
+            .ground {
+                height: 60px;
+            }
+
+            .grass {
+                bottom: 50px;
+                height: 25px;
+            }
+
+            .frog {
+                bottom: 75px;
+                left: 30px;
+                width: 45px;
+                height: 38px;
+                transform: scale(0.8);
+                transform-origin: bottom left;
+            }
+
+            .distance-marker {
+                font-size: 11px;
+                bottom: 65px;
+            }
+
+            .best-distance {
+                padding: 6px 10px;
+                font-size: 0.8em;
+                border-radius: 8px;
+            }
+
+            .awake-timer {
+                padding: 6px 10px;
+                font-size: 0.8em;
+                border-radius: 8px;
+            }
+
+            .sleep-message {
+                font-size: 1.3em;
+            }
+
+            .sleep-countdown {
+                font-size: 2em;
+            }
+
+            .instructions {
+                font-size: 0.95em;
+                margin-bottom: 8px;
+            }
+
+            .power-bar-container {
+                width: 90%;
+                margin-bottom: 15px;
+            }
+
+            .power-bar {
+                height: 25px;
+            }
+
+            .power-label {
+                font-size: 0.9em;
+            }
+
+            .jump-button {
+                width: 180px;
+                padding: 15px 30px;
+                font-size: 1.2em;
+                border-radius: 25px;
+                margin-bottom: 15px;
+            }
+
+            .skins-panel {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .skins-panel h2 {
+                font-size: 1.2em;
+                margin-bottom: 12px;
+            }
+
+            .skins-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .skin-card {
+                padding: 10px;
+                border-radius: 12px;
+            }
+
+            .skin-preview {
+                width: 45px;
+                height: 38px;
+                margin-bottom: 8px;
+            }
+
+            .skin-name {
+                font-size: 0.85em;
+            }
+
+            .skin-bonus,
+            .skin-cooldown,
+            .skin-unlock {
+                font-size: 0.75em;
+            }
+
+            .result-popup {
+                padding: 25px;
+                border-radius: 20px;
+                width: 90%;
+                max-width: 320px;
+            }
+
+            .result-popup h2 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+
+            .result-distance {
+                font-size: 2.2em;
+                margin-bottom: 8px;
+            }
+
+            .result-xp {
+                font-size: 1em;
+                margin-bottom: 15px;
+            }
+
+            .level-up,
+            .unlock-notification {
+                padding: 8px 15px;
+                font-size: 0.9em;
+                margin-bottom: 12px;
+            }
+
+            .continue-btn {
+                padding: 12px 30px;
+                font-size: 1em;
+                border-radius: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .header h1 {
+                font-size: 1.4em;
+            }
+
+            .stat-box {
+                padding: 6px 10px;
+                font-size: 0.75em;
+            }
+
+            .game-area {
+                height: 250px;
+            }
+
+            .frog {
+                bottom: 65px;
+                left: 20px;
+                transform: scale(0.7);
+            }
+
+            .distance-marker {
+                font-size: 10px;
+                bottom: 55px;
+            }
+
+            .skins-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .jump-button {
+                width: 160px;
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -925,11 +1136,11 @@
                 </div>
             </div>
 
-            <div class="distance-marker" style="left: 150px;">5m</div>
-            <div class="distance-marker" style="left: 300px;">10m</div>
-            <div class="distance-marker" style="left: 450px;">15m</div>
-            <div class="distance-marker" style="left: 600px;">20m</div>
-            <div class="distance-marker" style="left: 750px;">25m</div>
+            <div class="distance-marker" style="left: 200px;">5m</div>
+            <div class="distance-marker" style="left: 350px;">10m</div>
+            <div class="distance-marker" style="left: 500px;">15m</div>
+            <div class="distance-marker" style="left: 650px;">20m</div>
+            <div class="distance-marker" style="left: 800px;">25m</div>
         </div>
 
         <p class="instructions">Hold the button to charge power, release to jump!</p>
