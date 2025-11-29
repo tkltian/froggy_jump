@@ -1434,14 +1434,9 @@
         let chargeInterval;
 
         function startCharging() {
-            console.log('startCharging called', { isJumping: gameState.isJumping, isSleeping, disabled: jumpBtn.disabled });
-            if (gameState.isJumping || isSleeping) {
-                console.log('startCharging blocked - isJumping:', gameState.isJumping, 'isSleeping:', isSleeping);
-                return;
-            }
+            if (gameState.isJumping || isSleeping) return;
             gameState.isCharging = true;
             gameState.power = 0;
-            console.log('Charging started!');
 
             chargeInterval = setInterval(() => {
                 gameState.power = Math.min(100, gameState.power + 2);
@@ -1451,7 +1446,6 @@
         }
 
         function stopCharging() {
-            console.log('stopCharging called', { isCharging: gameState.isCharging, power: gameState.power });
             if (!gameState.isCharging) return;
             gameState.isCharging = false;
             clearInterval(chargeInterval);
@@ -1587,10 +1581,8 @@
         // Load game
         function loadGame() {
             const saved = localStorage.getItem('froggyJump');
-            console.log('Loading game, saved data:', saved);
             if (saved) {
                 const data = JSON.parse(saved);
-                console.log('Parsed data:', data);
                 Object.assign(gameState, data);
                 // Reset runtime state that shouldn't be persisted
                 gameState.isJumping = false;
@@ -1598,28 +1590,18 @@
                 gameState.power = 0;
                 frog.className = `frog skin-${gameState.currentSkin}`;
             }
-            console.log('Final gameState:', gameState);
             updateUI();
         }
 
         // Event listeners
-        console.log('Setting up event listeners, jumpBtn:', jumpBtn);
-        jumpBtn.addEventListener('mousedown', (e) => {
-            console.log('mousedown event fired');
-            startCharging();
-        });
-        jumpBtn.addEventListener('mouseup', (e) => {
-            console.log('mouseup event fired');
-            stopCharging();
-        });
+        jumpBtn.addEventListener('mousedown', startCharging);
+        jumpBtn.addEventListener('mouseup', stopCharging);
         jumpBtn.addEventListener('mouseleave', stopCharging);
         jumpBtn.addEventListener('touchstart', (e) => {
-            console.log('touchstart event fired');
             e.preventDefault();
             startCharging();
         }, { passive: false });
         jumpBtn.addEventListener('touchend', (e) => {
-            console.log('touchend event fired');
             e.preventDefault();
             stopCharging();
         }, { passive: false });
