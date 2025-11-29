@@ -484,6 +484,223 @@
             font-weight: bold;
         }
 
+        /* Labubu Monster Toys */
+        .labubu {
+            position: absolute;
+            bottom: 60px;
+            width: 30px;
+            height: 35px;
+            z-index: 5;
+            transition: transform 0.3s;
+        }
+
+        .labubu:hover {
+            transform: scale(1.1);
+        }
+
+        .labubu-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Regular Labubu - Pink cute monster */
+        .labubu-regular .labubu-head {
+            position: absolute;
+            width: 26px;
+            height: 22px;
+            background: linear-gradient(180deg, #FFB6C1, #FF91A4);
+            border-radius: 50% 50% 45% 45%;
+            top: 0;
+            left: 2px;
+            box-shadow: inset 0 -3px 6px rgba(0,0,0,0.1);
+        }
+
+        .labubu-regular .labubu-ear {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: linear-gradient(180deg, #FFB6C1, #FF91A4);
+            border-radius: 50% 50% 30% 30%;
+            top: -8px;
+        }
+
+        .labubu-regular .labubu-ear.left { left: 3px; transform: rotate(-15deg); }
+        .labubu-regular .labubu-ear.right { right: 3px; transform: rotate(15deg); }
+
+        .labubu-regular .labubu-eye {
+            position: absolute;
+            width: 6px;
+            height: 7px;
+            background: #333;
+            border-radius: 50%;
+            top: 8px;
+        }
+
+        .labubu-regular .labubu-eye.left { left: 6px; }
+        .labubu-regular .labubu-eye.right { right: 6px; }
+
+        .labubu-regular .labubu-eye::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            top: 1px;
+            left: 1px;
+        }
+
+        .labubu-regular .labubu-mouth {
+            position: absolute;
+            width: 8px;
+            height: 4px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            top: 15px;
+            left: 9px;
+        }
+
+        .labubu-regular .labubu-body-main {
+            position: absolute;
+            width: 22px;
+            height: 16px;
+            background: linear-gradient(180deg, #FF91A4, #FF7086);
+            border-radius: 40% 40% 50% 50%;
+            top: 18px;
+            left: 4px;
+        }
+
+        /* Limited Edition Labubu - Black with gold accents */
+        .labubu-limited .labubu-head {
+            position: absolute;
+            width: 26px;
+            height: 22px;
+            background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+            border-radius: 50% 50% 45% 45%;
+            top: 0;
+            left: 2px;
+            box-shadow: inset 0 -3px 6px rgba(255,215,0,0.2), 0 0 10px rgba(255,215,0,0.3);
+        }
+
+        .labubu-limited .labubu-ear {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+            border-radius: 50% 50% 30% 30%;
+            top: -8px;
+            border-top: 2px solid gold;
+        }
+
+        .labubu-limited .labubu-ear.left { left: 3px; transform: rotate(-15deg); }
+        .labubu-limited .labubu-ear.right { right: 3px; transform: rotate(15deg); }
+
+        .labubu-limited .labubu-eye {
+            position: absolute;
+            width: 6px;
+            height: 7px;
+            background: gold;
+            border-radius: 50%;
+            top: 8px;
+            box-shadow: 0 0 5px gold;
+        }
+
+        .labubu-limited .labubu-eye.left { left: 6px; }
+        .labubu-limited .labubu-eye.right { right: 6px; }
+
+        .labubu-limited .labubu-mouth {
+            position: absolute;
+            width: 8px;
+            height: 4px;
+            border: 2px solid gold;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            top: 15px;
+            left: 9px;
+        }
+
+        .labubu-limited .labubu-body-main {
+            position: absolute;
+            width: 22px;
+            height: 16px;
+            background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+            border-radius: 40% 40% 50% 50%;
+            top: 18px;
+            left: 4px;
+            box-shadow: 0 0 8px rgba(255,215,0,0.4);
+        }
+
+        .labubu-limited::before {
+            content: '★';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: gold;
+            font-size: 12px;
+            animation: star-pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes star-pulse {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateX(-50%) scale(1.2); }
+        }
+
+        /* Labubu reveal overlay */
+        .labubu-reveal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .labubu-reveal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .labubu-reveal-content {
+            text-align: center;
+            color: white;
+        }
+
+        .labubu-reveal-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .labubu-reveal-monster {
+            transform: scale(3);
+            margin: 40px auto;
+        }
+
+        .labubu-reveal-bonus {
+            font-size: 1.8em;
+            color: #FFD700;
+            margin-top: 20px;
+            animation: bonusPop 0.5s ease-out;
+        }
+
+        @keyframes bonusPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .jump-button {
             display: flex;
             flex-direction: column;
@@ -1164,6 +1381,9 @@
                 <div class="grass"></div>
                 <div class="ground"></div>
 
+                <!-- Labubu toys container -->
+                <div id="labubu-container"></div>
+
                 <div class="frog skin-default" id="frog">
                     <div class="frog-body">
                         <!-- Accessories -->
@@ -1238,6 +1458,15 @@
         <button class="continue-btn" id="continue-btn">Continue</button>
     </div>
 
+    <!-- Labubu Reveal Overlay -->
+    <div class="labubu-reveal" id="labubu-reveal">
+        <div class="labubu-reveal-content">
+            <div class="labubu-reveal-title" id="labubu-reveal-title">You found a Labubu!</div>
+            <div class="labubu-reveal-monster" id="labubu-reveal-monster"></div>
+            <div class="labubu-reveal-bonus" id="labubu-reveal-bonus">+50 XP Bonus!</div>
+        </div>
+    </div>
+
     <script>
         // Game State
         const gameState = {
@@ -1295,6 +1524,123 @@
         let isSleeping = false;
         let awakeInterval = null;
         let sleepInterval = null;
+
+        // Labubu DOM elements
+        const labubuContainer = document.getElementById('labubu-container');
+        const labubuReveal = document.getElementById('labubu-reveal');
+        const labubuRevealTitle = document.getElementById('labubu-reveal-title');
+        const labubuRevealMonster = document.getElementById('labubu-reveal-monster');
+        const labubuRevealBonus = document.getElementById('labubu-reveal-bonus');
+
+        // Labubu state
+        let activeLabubus = [];
+        const LABUBU_CATCH_DISTANCE = 50; // pixels - how close frog needs to land
+        const LABUBU_REGULAR_BONUS = 50;
+        const LABUBU_LIMITED_BONUS = 500;
+
+        // Create Labubu HTML
+        function createLabubuHTML(isLimited) {
+            return `
+                <div class="labubu-body">
+                    <div class="labubu-ear left"></div>
+                    <div class="labubu-ear right"></div>
+                    <div class="labubu-head">
+                        <div class="labubu-eye left"></div>
+                        <div class="labubu-eye right"></div>
+                        <div class="labubu-mouth"></div>
+                    </div>
+                    <div class="labubu-body-main"></div>
+                </div>
+            `;
+        }
+
+        // Spawn Labubu toys
+        function spawnLabubus() {
+            // Clear existing
+            labubuContainer.innerHTML = '';
+            activeLabubus = [];
+
+            // Spawn 2-4 regular Labubus at random positions
+            const numLabubus = 2 + Math.floor(Math.random() * 3);
+
+            for (let i = 0; i < numLabubus; i++) {
+                // Random position between 100px and 2000px (avoiding the start)
+                const position = 150 + Math.floor(Math.random() * 1850);
+
+                // 1/36 chance for limited edition
+                const isLimited = Math.random() < (1/36);
+
+                const labubu = document.createElement('div');
+                labubu.className = `labubu ${isLimited ? 'labubu-limited' : 'labubu-regular'}`;
+                labubu.style.left = `${position}px`;
+                labubu.innerHTML = createLabubuHTML(isLimited);
+
+                labubuContainer.appendChild(labubu);
+                activeLabubus.push({
+                    element: labubu,
+                    position: position,
+                    isLimited: isLimited,
+                    collected: false
+                });
+            }
+        }
+
+        // Check if frog landed near any Labubu
+        function checkLabubuCollision(frogPosition) {
+            let collectedLabubu = null;
+
+            for (const labubu of activeLabubus) {
+                if (labubu.collected) continue;
+
+                const distance = Math.abs(frogPosition - labubu.position);
+                if (distance <= LABUBU_CATCH_DISTANCE) {
+                    labubu.collected = true;
+                    labubu.element.style.opacity = '0.3';
+                    labubu.element.style.transform = 'scale(0.5)';
+                    collectedLabubu = labubu;
+                    break; // Only collect one per jump
+                }
+            }
+
+            return collectedLabubu;
+        }
+
+        // Show Labubu reveal animation
+        function showLabubuReveal(labubu, callback) {
+            const isLimited = labubu.isLimited;
+            const bonus = isLimited ? LABUBU_LIMITED_BONUS : LABUBU_REGULAR_BONUS;
+
+            // Check if Labubu was off-screen
+            const areaWidth = gameArea.offsetWidth;
+            const isOffScreen = labubu.position > areaWidth;
+
+            if (isOffScreen) {
+                // Pan camera to show the Labubu first
+                updateCamera(labubu.position - 50);
+            }
+
+            // Set reveal content
+            if (isLimited) {
+                labubuRevealTitle.innerHTML = '🌟 SECRET EDITION! 🌟<br>Black & Gold Labubu!';
+                labubuRevealTitle.style.color = 'gold';
+            } else {
+                labubuRevealTitle.innerHTML = '🎉 You found a Labubu! 🎉';
+                labubuRevealTitle.style.color = 'white';
+            }
+
+            labubuRevealMonster.innerHTML = createLabubuHTML(isLimited);
+            labubuRevealMonster.className = `labubu-reveal-monster ${isLimited ? 'labubu-limited' : 'labubu-regular'}`;
+            labubuRevealBonus.textContent = `+${bonus} XP Bonus!`;
+
+            // Show reveal
+            labubuReveal.classList.add('active');
+
+            // Auto-close after delay
+            setTimeout(() => {
+                labubuReveal.classList.remove('active');
+                if (callback) callback(bonus);
+            }, isLimited ? 2500 : 1500);
+        }
 
         // Calculate XP needed for level
         function getXpNeeded(level) {
@@ -1553,8 +1899,8 @@
                 frog.style.left = `${50 + pixelDistance}px`;
                 updateCamera(pixelDistance);
 
-                // Calculate XP
-                const xpGained = Math.floor(totalDistance * 5);
+                // Calculate base XP
+                let xpGained = Math.floor(totalDistance * 5);
 
                 // Check for new best
                 const isNewBest = totalDistance > gameState.bestJump;
@@ -1562,38 +1908,62 @@
                     gameState.bestJump = totalDistance;
                 }
 
-                // Add XP and check level up
-                const oldLevel = gameState.level;
-                gameState.xp += xpGained;
+                // Check for Labubu collision
+                const frogPosition = 50 + pixelDistance;
+                const collectedLabubu = checkLabubuCollision(frogPosition);
 
-                while (gameState.xp >= getXpNeeded(gameState.level)) {
-                    gameState.xp -= getXpNeeded(gameState.level);
-                    gameState.level++;
-                }
+                // Function to finish the jump (called after Labubu reveal if any)
+                const finishJump = (labubuBonus = 0) => {
+                    const totalXp = xpGained + labubuBonus;
 
-                const levelsGained = gameState.level - oldLevel;
+                    // Add XP and check level up
+                    const oldLevel = gameState.level;
+                    gameState.xp += totalXp;
 
-                // Check for skin unlocks
-                const newUnlocks = [];
-                skins.forEach(skin => {
-                    if (gameState.level >= skin.unlockLevel && !gameState.unlockedSkins.includes(skin.id)) {
-                        gameState.unlockedSkins.push(skin.id);
-                        newUnlocks.push(skin.name);
+                    while (gameState.xp >= getXpNeeded(gameState.level)) {
+                        gameState.xp -= getXpNeeded(gameState.level);
+                        gameState.level++;
                     }
-                });
 
-                // Show result popup
-                showResult(totalDistance, xpGained, levelsGained, newUnlocks, isNewBest);
+                    const levelsGained = gameState.level - oldLevel;
 
-                saveGame();
-                updateUI();
+                    // Check for skin unlocks
+                    const newUnlocks = [];
+                    skins.forEach(skin => {
+                        if (gameState.level >= skin.unlockLevel && !gameState.unlockedSkins.includes(skin.id)) {
+                            gameState.unlockedSkins.push(skin.id);
+                            newUnlocks.push(skin.name);
+                        }
+                    });
+
+                    // Show result popup
+                    showResult(totalDistance, totalXp, levelsGained, newUnlocks, isNewBest, labubuBonus);
+
+                    saveGame();
+                    updateUI();
+                };
+
+                if (collectedLabubu) {
+                    // Show Labubu reveal, then finish jump
+                    showLabubuReveal(collectedLabubu, finishJump);
+                } else {
+                    // No Labubu, finish immediately
+                    finishJump(0);
+                }
             }, 1000);
         }
 
         // Show result popup
-        function showResult(distance, xp, levelsGained, newUnlocks, isNewBest) {
+        function showResult(distance, xp, levelsGained, newUnlocks, isNewBest, labubuBonus = 0) {
             resultDistance.textContent = distance.toFixed(1);
-            resultXp.textContent = xp;
+
+            // Show XP with Labubu bonus breakdown if applicable
+            if (labubuBonus > 0) {
+                const baseXp = xp - labubuBonus;
+                resultXp.innerHTML = `${baseXp} <span style="color: #FFD700;">+ ${labubuBonus} 🎁</span>`;
+            } else {
+                resultXp.textContent = xp;
+            }
 
             if (levelsGained > 0) {
                 levelUpMsg.style.display = 'block';
@@ -1611,6 +1981,10 @@
 
             if (isNewBest) {
                 resultPopup.querySelector('h2').textContent = '🏆 New Record!';
+            } else if (labubuBonus >= LABUBU_LIMITED_BONUS) {
+                resultPopup.querySelector('h2').textContent = '🌟 RARE FIND!';
+            } else if (labubuBonus > 0) {
+                resultPopup.querySelector('h2').textContent = '🎁 Labubu Bonus!';
             } else {
                 resultPopup.querySelector('h2').textContent = 'Great Jump!';
             }
@@ -1632,6 +2006,9 @@
             gameState.power = 0;
             gameState.isJumping = false;
             jumpBtn.disabled = false;
+
+            // Spawn new Labubus for next jump
+            spawnLabubus();
         }
 
         // Save game
@@ -1678,6 +2055,7 @@
         loadGame();
         updateAwakeDisplay();
         startAwakeTimer();
+        spawnLabubus();
     </script>
 </body>
 </html>
