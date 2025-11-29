@@ -1194,14 +1194,31 @@
             }
         }
 
+        // Random distance multiplier - usually consistent, occasionally wild
+        function getRandomJumpMultiplier() {
+            const roll = Math.random();
+
+            if (roll < 0.85) {
+                // 85% of the time: small variation (0.9 to 1.1)
+                return 0.9 + Math.random() * 0.2;
+            } else if (roll < 0.925) {
+                // 7.5% of the time: jump much shorter (0.4 to 0.7)
+                return 0.4 + Math.random() * 0.3;
+            } else {
+                // 7.5% of the time: jump much farther (1.4 to 1.8)
+                return 1.4 + Math.random() * 0.4;
+            }
+        }
+
         // Perform jump
         function performJump() {
             gameState.isJumping = true;
             jumpBtn.disabled = true;
 
             const skinBonus = getSkinBonus();
+            const randomMultiplier = getRandomJumpMultiplier();
             const baseDistance = (gameState.power / 100) * 15; // Max 15m base
-            const totalDistance = baseDistance * skinBonus;
+            const totalDistance = baseDistance * skinBonus * randomMultiplier;
             const pixelDistance = totalDistance * 30; // 30 pixels per meter
 
             // Set CSS variables for animation
