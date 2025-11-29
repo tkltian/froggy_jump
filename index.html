@@ -52,7 +52,7 @@
         .subtitle {
             font-size: 0.75em;
             color: #FF69B4;
-            max-width: 140px;
+            max-width: 200px;
             line-height: 1.3;
             text-align: left;
             font-style: italic;
@@ -486,10 +486,8 @@
 
         .jump-button {
             display: block;
-            width: 180px;
-            margin: 0 auto 10px;
-            padding: 14px 30px;
-            font-size: 1.3em;
+            padding: 14px 25px;
+            font-size: 1.2em;
             font-family: inherit;
             background: linear-gradient(135deg, #FF6B6B, #FF8E53);
             color: white;
@@ -502,6 +500,7 @@
             user-select: none;
             touch-action: manipulation;
             -webkit-touch-callout: none;
+            white-space: nowrap;
         }
 
         .jump-button:hover {
@@ -519,10 +518,17 @@
             transform: none;
         }
 
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
         .power-bar-container {
-            width: 80%;
-            max-width: 400px;
-            margin: 0 auto 10px;
+            flex: 1;
+            max-width: 350px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 12px;
             padding: 4px;
@@ -714,13 +720,6 @@
             border-radius: 10px;
             font-weight: bold;
             color: #333;
-        }
-
-        .instructions {
-            text-align: center;
-            color: #2E8B57;
-            margin-bottom: 6px;
-            font-size: 0.9em;
         }
 
         .clouds {
@@ -980,14 +979,12 @@
                 font-size: 1.8em;
             }
 
-            .instructions {
-                font-size: 0.8em;
-                margin-bottom: 5px;
+            .controls-row {
+                gap: 10px;
             }
 
             .power-bar-container {
-                width: 90%;
-                margin-bottom: 8px;
+                flex: 1;
             }
 
             .power-bar {
@@ -999,11 +996,9 @@
             }
 
             .jump-button {
-                width: 160px;
-                padding: 12px 25px;
-                font-size: 1.1em;
-                border-radius: 20px;
-                margin-bottom: 8px;
+                padding: 10px 15px;
+                font-size: 1em;
+                border-radius: 18px;
             }
 
             .skins-panel {
@@ -1084,8 +1079,8 @@
             }
 
             .subtitle {
-                font-size: 0.6em;
-                max-width: 100px;
+                font-size: 0.55em;
+                max-width: 120px;
             }
 
             .stat-box {
@@ -1113,9 +1108,8 @@
             }
 
             .jump-button {
-                width: 150px;
-                padding: 10px 20px;
-                font-size: 1em;
+                padding: 8px 12px;
+                font-size: 0.9em;
             }
         }
     </style>
@@ -1125,7 +1119,7 @@
         <div class="header">
             <div class="title-row">
                 <h1>🐸 Froggy Jump! 🐸</h1>
-                <div class="subtitle">A game made by Claire Rowe on her uncle's laptop</div>
+                <div class="subtitle">A game made by Claire Rowe on her uncle's laptop, using AI coding tool Claude</div>
             </div>
             <div class="stats">
                 <div class="stat-box">Level: <span id="level">1</span></div>
@@ -1211,14 +1205,13 @@
             </div>
         </div>
 
-        <p class="instructions">Hold the button to charge power, release to jump!</p>
-
-        <div class="power-bar-container">
-            <div class="power-label">Power: <span id="power-percent">0</span>%</div>
-            <div class="power-bar" id="power-bar"></div>
+        <div class="controls-row">
+            <div class="power-bar-container">
+                <div class="power-label">Power: <span id="power-percent">0</span>%</div>
+                <div class="power-bar" id="power-bar"></div>
+            </div>
+            <button class="jump-button" id="jump-btn">🐸 HOLD!</button>
         </div>
-
-        <button class="jump-button" id="jump-btn">🐸 HOLD TO JUMP!</button>
 
         <div class="skins-panel">
             <h2>🎨 Frog Skins</h2>
