@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Froggy Jump!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard', cursive;
+            background: linear-gradient(180deg, #87CEEB 0%, #98FB98 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .game-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #2E8B57;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #90EE90, #32CD32);
+            padding: 10px 25px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-area {
+            background: linear-gradient(180deg, #87CEEB 0%, #90EE90 60%, #654321 100%);
+            border-radius: 20px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(180deg, #8B4513, #654321);
+        }
+
+        .grass {
+            position: absolute;
+            bottom: 70px;
+            width: 100%;
+            height: 30px;
+            background: repeating-linear-gradient(
+                90deg,
+                #228B22 0px,
+                #32CD32 10px,
+                #228B22 20px
+            );
+            border-radius: 50% 50% 0 0;
+        }
+
+        .frog {
+            position: absolute;
+            bottom: 100px;
+            left: 50px;
+            width: 60px;
+            height: 50px;
+            transition: transform 0.1s;
+            z-index: 10;
+        }
+
+        .frog.jumping {
+            animation: jump 1s ease-out forwards;
+        }
+
+        @keyframes jump {
+            0% { transform: translateX(0) translateY(0) rotate(0deg); }
+            30% { transform: translateX(var(--jump-distance-30)) translateY(-150px) rotate(-15deg); }
+            60% { transform: translateX(var(--jump-distance-60)) translateY(-100px) rotate(-10deg); }
+            100% { transform: translateX(var(--jump-distance)) translateY(0) rotate(0deg); }
+        }
+
+        .frog-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Kawaii Frog - Super Cute Design */
+        .frog-main {
+            position: absolute;
+            width: 55px;
+            height: 45px;
+            border-radius: 50% 50% 45% 45%;
+            bottom: 0;
+            left: 2px;
+            box-shadow: inset -3px -3px 8px rgba(0,0,0,0.1), inset 3px 3px 8px rgba(255,255,255,0.3);
+        }
+
+        /* Cute belly patch */
+        .belly {
+            position: absolute;
+            width: 35px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            bottom: 5px;
+            left: 12px;
+        }
+
+        .frog-head {
+            position: absolute;
+            width: 45px;
+            height: 35px;
+            border-radius: 50%;
+            top: -5px;
+            left: 7px;
+            box-shadow: inset -2px -2px 6px rgba(0,0,0,0.1), inset 2px 2px 6px rgba(255,255,255,0.3);
+        }
+
+        /* Big Kawaii Eyes */
+        .eye {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: -2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        /* Main pupil */
+        .eye::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            top: 4px;
+            left: 3px;
+        }
+
+        /* Sparkle/shine in eye */
+        .eye::before {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 8px;
+            z-index: 5;
+            box-shadow: -4px 6px 0 1px rgba(255,255,255,0.5);
+        }
+
+        .eye.left { left: 3px; }
+        .eye.right { right: 3px; }
+
+        /* Cute smile */
+        .mouth {
+            position: absolute;
+            width: 12px;
+            height: 6px;
+            border: 2px solid rgba(0,0,0,0.25);
+            border-top: none;
+            border-radius: 0 0 50% 50%;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Big rosy cheeks */
+        .cheek {
+            position: absolute;
+            width: 10px;
+            height: 7px;
+            background: rgba(255, 120, 150, 0.6);
+            border-radius: 50%;
+            top: 15px;
+            filter: blur(1px);
+        }
+
+        .cheek.left { left: 0px; }
+        .cheek.right { right: 0px; }
+
+        /* Chubby little legs */
+        .leg {
+            position: absolute;
+            width: 14px;
+            height: 16px;
+            border-radius: 50% 50% 40% 40%;
+            bottom: -3px;
+        }
+
+        .leg.front-left { left: 5px; }
+        .leg.front-right { right: 5px; }
+        .leg.back-left { left: -2px; bottom: 8px; width: 16px; height: 14px; border-radius: 40%; }
+        .leg.back-right { right: -2px; bottom: 8px; width: 16px; height: 14px; border-radius: 40%; }
+
+        /* === SKIN STYLES === */
+
+        /* Default - Soft mint green kawaii frog */
+        .skin-default .frog-main,
+        .skin-default .frog-head,
+        .skin-default .leg {
+            background: linear-gradient(145deg, #7FD87F, #5CBF5C);
+        }
+        .skin-default .belly { background: rgba(255, 255, 220, 0.5); }
+
+        /* Golden - Sunny happy frog with star eyes */
+        .skin-golden .frog-main,
+        .skin-golden .frog-head,
+        .skin-golden .leg {
+            background: linear-gradient(145deg, #FFE066, #FFB347);
+            box-shadow: inset -3px -3px 8px rgba(0,0,0,0.1), inset 3px 3px 8px rgba(255,255,255,0.4), 0 0 15px rgba(255,200,0,0.3);
+        }
+        .skin-golden .belly { background: rgba(255, 255, 255, 0.5); }
+        .skin-golden .cheek { background: rgba(255, 150, 100, 0.6); }
+        .skin-golden .eye::before {
+            width: 6px;
+            height: 6px;
+            background: #FFD700;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        /* Royal - Purple prince/princess frog */
+        .skin-royal .frog-main,
+        .skin-royal .frog-head,
+        .skin-royal .leg {
+            background: linear-gradient(145deg, #B19CD9, #8B5CF6);
+            box-shadow: inset -3px -3px 8px rgba(0,0,0,0.15), inset 3px 3px 8px rgba(255,255,255,0.2);
+        }
+        .skin-royal .belly { background: rgba(230, 210, 255, 0.4); }
+        .skin-royal .cheek { background: rgba(255, 150, 200, 0.6); }
+        .skin-royal .eye::after { background: #4B0082; }
+
+        /* Cosmic - Galaxy frog with starry eyes */
+        .skin-cosmic .frog-main,
+        .skin-cosmic .frog-head,
+        .skin-cosmic .leg {
+            background: linear-gradient(145deg, #1a1a4e, #2d1b69, #0d0d2b);
+            box-shadow: inset -3px -3px 8px rgba(0,0,0,0.3), 0 0 20px rgba(100,100,255,0.4), 0 0 40px rgba(200,100,255,0.2);
+        }
+        .skin-cosmic .belly {
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(200,150,255,0.3), transparent 40%);
+        }
+        .skin-cosmic .cheek { background: rgba(200, 150, 255, 0.5); }
+        .skin-cosmic .eye::after {
+            background: radial-gradient(circle at 40% 40%, #4B0082, #000033);
+        }
+        .skin-cosmic .eye::before {
+            box-shadow: -4px 6px 0 1px rgba(255,200,255,0.5), -8px 2px 0 0 rgba(100,200,255,0.8), 2px 8px 0 0 rgba(255,255,100,0.6);
+        }
+
+        /* Rainbow - Magical pastel rainbow frog */
+        .skin-rainbow .frog-main,
+        .skin-rainbow .frog-head,
+        .skin-rainbow .leg {
+            background: linear-gradient(135deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF, #E0BBE4);
+            background-size: 200% 200%;
+            animation: rainbow-shift 3s ease infinite;
+            box-shadow: inset -3px -3px 8px rgba(0,0,0,0.1), inset 3px 3px 8px rgba(255,255,255,0.5), 0 0 20px rgba(255,200,255,0.3);
+        }
+        .skin-rainbow .belly { background: rgba(255, 255, 255, 0.6); }
+        .skin-rainbow .cheek {
+            background: rgba(255, 150, 200, 0.7);
+            animation: blush-pulse 2s ease-in-out infinite;
+        }
+        .skin-rainbow .eye::before {
+            background: linear-gradient(135deg, #FF6B6B, #FFE66D, #4ECDC4, #A78BFA);
+            background-size: 200% 200%;
+            animation: rainbow-shift 2s ease infinite;
+            box-shadow: -4px 6px 0 1px rgba(255,255,255,0.7);
+        }
+
+        @keyframes rainbow-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes blush-pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* === ACCESSORIES === */
+
+        /* Cute bow for golden frog */
+        .bow {
+            position: absolute;
+            top: -12px;
+            right: -5px;
+            width: 16px;
+            height: 12px;
+            display: none;
+        }
+        .bow::before, .bow::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 8px;
+            background: #FF6B9D;
+            border-radius: 50% 50% 50% 50%;
+        }
+        .bow::before { left: 0; transform: rotate(-20deg); }
+        .bow::after { right: 0; transform: rotate(20deg); }
+        .skin-golden .bow { display: block; }
+
+        /* Crown for royal frog */
+        .crown {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 14px;
+            background: linear-gradient(180deg, #FFD700, #FFA500);
+            clip-path: polygon(0% 100%, 10% 40%, 25% 100%, 40% 20%, 50% 100%, 60% 20%, 75% 100%, 90% 40%, 100% 100%);
+            display: none;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+        }
+        .crown::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FF6B6B;
+            border-radius: 50%;
+            top: 6px;
+            left: 9px;
+        }
+        .skin-royal .crown { display: block; }
+
+        /* Sparkles for cosmic and rainbow */
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+        }
+
+        .skin-cosmic .sparkles,
+        .skin-rainbow .sparkles { display: block; }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .skin-cosmic .sparkle { background: #E0E7FF; box-shadow: 0 0 4px #A78BFA; }
+        .skin-rainbow .sparkle { background: #FFB3BA; }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Halo for rainbow frog */
+        .halo {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 10px;
+            border: 3px solid;
+            border-color: rgba(255,200,100,0.8);
+            border-radius: 50%;
+            display: none;
+            animation: halo-glow 2s ease-in-out infinite;
+        }
+        .skin-rainbow .halo { display: block; }
+
+        @keyframes halo-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255,200,100,0.5); }
+            50% { box-shadow: 0 0 15px rgba(255,200,100,0.8); }
+        }
+
+        /* Moon for cosmic frog */
+        .moon {
+            position: absolute;
+            top: -20px;
+            right: -8px;
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #FFFACD, #F0E68C);
+            border-radius: 50%;
+            display: none;
+            box-shadow: 0 0 10px rgba(255,250,150,0.6);
+        }
+        .moon::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #1a1a4e;
+            border-radius: 50%;
+            top: -2px;
+            left: 6px;
+        }
+        .skin-cosmic .moon { display: block; }
+
+        .distance-marker {
+            position: absolute;
+            bottom: 85px;
+            font-size: 14px;
+            color: #654321;
+            font-weight: bold;
+        }
+
+        .jump-button {
+            display: block;
+            width: 200px;
+            margin: 0 auto 20px;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            font-family: inherit;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s;
+        }
+
+        .jump-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+        }
+
+        .jump-button:active {
+            transform: translateY(0);
+        }
+
+        .jump-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .power-bar-container {
+            width: 80%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .power-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #FFD700, #FF6B6B, #FF0000);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.05s;
+        }
+
+        .power-label {
+            text-align: center;
+            color: #2E8B57;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .skins-panel {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skins-panel h2 {
+            text-align: center;
+            color: #2E8B57;
+            margin-bottom: 15px;
+        }
+
+        .skins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .skin-card {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .skin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .skin-card.selected {
+            border-color: #32CD32;
+            background: linear-gradient(135deg, #90EE90, #98FB98);
+        }
+
+        .skin-card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .skin-card.locked:hover {
+            transform: none;
+        }
+
+        .skin-preview {
+            width: 60px;
+            height: 50px;
+            margin: 0 auto 10px;
+            position: relative;
+        }
+
+        .skin-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .skin-bonus {
+            font-size: 0.9em;
+            color: #FF6B6B;
+        }
+
+        .skin-unlock {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .result-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .result-popup h2 {
+            color: #2E8B57;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .result-distance {
+            font-size: 3em;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+        }
+
+        .result-xp {
+            font-size: 1.2em;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .level-up {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            animation: pulse 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .unlock-notification {
+            background: linear-gradient(135deg, #9932CC, #4B0082);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .continue-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-family: inherit;
+            background: linear-gradient(135deg, #32CD32, #228B22);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .continue-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+
+        .best-distance {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 215, 0, 0.9);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .instructions {
+            text-align: center;
+            color: #2E8B57;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(1000px); }
+        }
+
+        /* Sleep/Cooldown Styles */
+        .sleep-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(25, 25, 112, 0.6);
+            z-index: 15;
+            border-radius: 20px;
+        }
+
+        .sleep-overlay.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sleep-message {
+            color: white;
+            font-size: 1.8em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 15px;
+        }
+
+        .sleep-countdown {
+            font-size: 3em;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .sleep-timer-bar {
+            width: 80%;
+            max-width: 300px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .sleep-timer-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #4169E1, #87CEEB);
+            border-radius: 10px;
+            transition: width 1s linear;
+        }
+
+        .zzz-container {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .zzz {
+            font-size: 2em;
+            color: white;
+            opacity: 0;
+            animation: float-zzz 2s ease-in-out infinite;
+        }
+
+        .zzz:nth-child(1) { animation-delay: 0s; }
+        .zzz:nth-child(2) { animation-delay: 0.5s; font-size: 1.5em; }
+        .zzz:nth-child(3) { animation-delay: 1s; font-size: 1.2em; }
+
+        @keyframes float-zzz {
+            0% { opacity: 0; transform: translateY(0) translateX(0); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-40px) translateX(20px); }
+        }
+
+        .frog.sleeping .eye::after {
+            height: 3px;
+            width: 10px;
+            top: 8px;
+            left: 4px;
+            border-radius: 0 0 50% 50%;
+            background: #1a1a2e;
+        }
+        .frog.sleeping .eye::before {
+            display: none;
+        }
+        .frog.sleeping .mouth {
+            border-radius: 50% 50% 50% 50%;
+            height: 4px;
+            width: 8px;
+            border: none;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .energy-bar-container {
+            width: 80%;
+            max-width: 400px;
+            margin: 0 auto 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .energy-bar {
+            height: 20px;
+            background: linear-gradient(90deg, #32CD32, #90EE90);
+            border-radius: 10px;
+            width: 100%;
+            transition: width 0.5s;
+        }
+
+        .energy-bar.low {
+            background: linear-gradient(90deg, #FF6B6B, #FFA500);
+        }
+
+        .energy-bar.critical {
+            background: linear-gradient(90deg, #FF0000, #FF6B6B);
+            animation: pulse-energy 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-energy {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .energy-label {
+            text-align: center;
+            color: #2E8B57;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .skin-cooldown {
+            font-size: 0.8em;
+            color: #4169E1;
+            margin-top: 3px;
+        }
+
+        .awake-timer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(50, 205, 50, 0.9);
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .awake-timer.warning {
+            background: rgba(255, 165, 0, 0.9);
+            animation: pulse 0.5s ease-in-out infinite alternate;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>🐸 Froggy Jump! 🐸</h1>
+            <div class="stats">
+                <div class="stat-box">Level: <span id="level">1</span></div>
+                <div class="stat-box">XP: <span id="xp">0</span>/<span id="xp-needed">100</span></div>
+                <div class="stat-box">Best Jump: <span id="best-jump">0</span>m</div>
+            </div>
+        </div>
+
+        <div class="game-area" id="game-area">
+            <div class="clouds">
+                <div class="cloud" style="width: 80px; height: 30px; top: 30px; left: 100px;"></div>
+                <div class="cloud" style="width: 60px; height: 25px; top: 60px; left: 300px; animation-delay: -5s;"></div>
+                <div class="cloud" style="width: 100px; height: 35px; top: 20px; left: 500px; animation-delay: -10s;"></div>
+            </div>
+
+            <div class="best-distance">🏆 Best: <span id="best-display">0</span>m</div>
+            <div class="awake-timer" id="awake-timer">Energy: 2:00</div>
+
+            <div class="sleep-overlay" id="sleep-overlay">
+                <div class="zzz-container">
+                    <span class="zzz">Z</span>
+                    <span class="zzz">z</span>
+                    <span class="zzz">z</span>
+                </div>
+                <div class="sleep-message">Froggy is sleeping...</div>
+                <div class="sleep-countdown" id="sleep-countdown">60</div>
+                <div class="sleep-timer-bar">
+                    <div class="sleep-timer-progress" id="sleep-progress"></div>
+                </div>
+            </div>
+
+            <div class="grass"></div>
+            <div class="ground"></div>
+
+            <div class="frog skin-default" id="frog">
+                <div class="frog-body">
+                    <!-- Accessories -->
+                    <div class="halo"></div>
+                    <div class="crown"></div>
+                    <div class="bow"></div>
+                    <div class="moon"></div>
+                    <div class="sparkles">
+                        <div class="sparkle" style="top: -5px; left: 5px;"></div>
+                        <div class="sparkle" style="top: 15px; right: -5px; animation-delay: 0.4s;"></div>
+                        <div class="sparkle" style="bottom: 5px; left: 30px; animation-delay: 0.8s;"></div>
+                        <div class="sparkle" style="top: 25px; left: -3px; animation-delay: 1.2s;"></div>
+                    </div>
+                    <!-- Head with kawaii face -->
+                    <div class="frog-head">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="cheek left"></div>
+                        <div class="cheek right"></div>
+                        <div class="mouth"></div>
+                    </div>
+                    <!-- Chubby body -->
+                    <div class="frog-main">
+                        <div class="belly"></div>
+                    </div>
+                    <!-- Little legs -->
+                    <div class="leg front-left"></div>
+                    <div class="leg front-right"></div>
+                    <div class="leg back-left"></div>
+                    <div class="leg back-right"></div>
+                </div>
+            </div>
+
+            <div class="distance-marker" style="left: 150px;">5m</div>
+            <div class="distance-marker" style="left: 300px;">10m</div>
+            <div class="distance-marker" style="left: 450px;">15m</div>
+            <div class="distance-marker" style="left: 600px;">20m</div>
+            <div class="distance-marker" style="left: 750px;">25m</div>
+        </div>
+
+        <p class="instructions">Hold the button to charge power, release to jump!</p>
+
+        <div class="power-bar-container">
+            <div class="power-label">Power: <span id="power-percent">0</span>%</div>
+            <div class="power-bar" id="power-bar"></div>
+        </div>
+
+        <button class="jump-button" id="jump-btn">🐸 HOLD TO JUMP!</button>
+
+        <div class="skins-panel">
+            <h2>🎨 Frog Skins</h2>
+            <div class="skins-grid" id="skins-grid"></div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="result-popup" id="result-popup">
+        <h2>Great Jump!</h2>
+        <div class="result-distance"><span id="result-distance">0</span>m</div>
+        <div class="result-xp">+<span id="result-xp">0</span> XP</div>
+        <div id="level-up-msg" class="level-up" style="display: none;"></div>
+        <div id="unlock-msg" class="unlock-notification" style="display: none;"></div>
+        <button class="continue-btn" id="continue-btn">Continue</button>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            level: 1,
+            xp: 0,
+            bestJump: 0,
+            currentSkin: 'default',
+            unlockedSkins: ['default'],
+            isCharging: false,
+            power: 0,
+            isJumping: false
+        };
+
+        // Skins Configuration (cooldownReduction: lower = faster recovery from sleep)
+        const skins = [
+            { id: 'default', name: 'Classic Froggy', bonus: 1.0, unlockLevel: 1, color: '#32CD32', cooldownReduction: 1.0 },
+            { id: 'golden', name: 'Golden Frog', bonus: 1.3, unlockLevel: 3, color: '#FFD700', cooldownReduction: 0.8 },
+            { id: 'royal', name: 'Royal Frog', bonus: 1.6, unlockLevel: 5, color: '#9932CC', cooldownReduction: 0.6 },
+            { id: 'cosmic', name: 'Cosmic Frog', bonus: 2.0, unlockLevel: 8, color: '#191970', cooldownReduction: 0.4 },
+            { id: 'rainbow', name: 'Rainbow Frog', bonus: 2.5, unlockLevel: 10, color: 'rainbow', cooldownReduction: 0.25 }
+        ];
+
+        // Sleep/Energy Configuration
+        const AWAKE_DURATION = 120; // 2 minutes of play before sleep
+        const BASE_SLEEP_DURATION = 60; // Base 60 seconds of sleep
+
+        // DOM Elements
+        const frog = document.getElementById('frog');
+        const jumpBtn = document.getElementById('jump-btn');
+        const powerBar = document.getElementById('power-bar');
+        const powerPercent = document.getElementById('power-percent');
+        const levelDisplay = document.getElementById('level');
+        const xpDisplay = document.getElementById('xp');
+        const xpNeededDisplay = document.getElementById('xp-needed');
+        const bestJumpDisplay = document.getElementById('best-jump');
+        const bestDisplay = document.getElementById('best-display');
+        const skinsGrid = document.getElementById('skins-grid');
+        const resultPopup = document.getElementById('result-popup');
+        const overlay = document.getElementById('overlay');
+        const resultDistance = document.getElementById('result-distance');
+        const resultXp = document.getElementById('result-xp');
+        const levelUpMsg = document.getElementById('level-up-msg');
+        const unlockMsg = document.getElementById('unlock-msg');
+        const continueBtn = document.getElementById('continue-btn');
+        const sleepOverlay = document.getElementById('sleep-overlay');
+        const sleepCountdown = document.getElementById('sleep-countdown');
+        const sleepProgress = document.getElementById('sleep-progress');
+        const awakeTimerDisplay = document.getElementById('awake-timer');
+
+        // Sleep state
+        let awakeTimeRemaining = AWAKE_DURATION;
+        let sleepTimeRemaining = 0;
+        let isSleeping = false;
+        let awakeInterval = null;
+        let sleepInterval = null;
+
+        // Calculate XP needed for level
+        function getXpNeeded(level) {
+            return Math.floor(100 * Math.pow(1.5, level - 1));
+        }
+
+        // Get current skin bonus
+        function getSkinBonus() {
+            const skin = skins.find(s => s.id === gameState.currentSkin);
+            return skin ? skin.bonus : 1.0;
+        }
+
+        // Get current skin cooldown reduction
+        function getSkinCooldownReduction() {
+            const skin = skins.find(s => s.id === gameState.currentSkin);
+            return skin ? skin.cooldownReduction : 1.0;
+        }
+
+        // Format time as M:SS
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Start awake timer
+        function startAwakeTimer() {
+            if (awakeInterval) clearInterval(awakeInterval);
+
+            awakeInterval = setInterval(() => {
+                if (isSleeping || gameState.isJumping) return;
+
+                awakeTimeRemaining--;
+                updateAwakeDisplay();
+
+                if (awakeTimeRemaining <= 0) {
+                    startSleep();
+                }
+            }, 1000);
+        }
+
+        // Update awake timer display
+        function updateAwakeDisplay() {
+            awakeTimerDisplay.textContent = `Energy: ${formatTime(awakeTimeRemaining)}`;
+
+            if (awakeTimeRemaining <= 30) {
+                awakeTimerDisplay.classList.add('warning');
+            } else {
+                awakeTimerDisplay.classList.remove('warning');
+            }
+        }
+
+        // Start sleep mode
+        function startSleep() {
+            isSleeping = true;
+            clearInterval(awakeInterval);
+
+            // Calculate sleep duration based on skin
+            const sleepDuration = Math.floor(BASE_SLEEP_DURATION * getSkinCooldownReduction());
+            sleepTimeRemaining = sleepDuration;
+
+            // Update UI
+            frog.classList.add('sleeping');
+            sleepOverlay.classList.add('active');
+            jumpBtn.disabled = true;
+            sleepProgress.style.width = '0%';
+
+            // Start sleep countdown
+            sleepInterval = setInterval(() => {
+                sleepTimeRemaining--;
+                sleepCountdown.textContent = sleepTimeRemaining;
+
+                const progress = ((Math.floor(BASE_SLEEP_DURATION * getSkinCooldownReduction()) - sleepTimeRemaining) /
+                                  Math.floor(BASE_SLEEP_DURATION * getSkinCooldownReduction())) * 100;
+                sleepProgress.style.width = `${progress}%`;
+
+                if (sleepTimeRemaining <= 0) {
+                    wakeUp();
+                }
+            }, 1000);
+        }
+
+        // Wake up from sleep
+        function wakeUp() {
+            isSleeping = false;
+            clearInterval(sleepInterval);
+
+            // Reset awake timer
+            awakeTimeRemaining = AWAKE_DURATION;
+            updateAwakeDisplay();
+
+            // Update UI
+            frog.classList.remove('sleeping');
+            sleepOverlay.classList.remove('active');
+            jumpBtn.disabled = false;
+
+            // Restart awake timer
+            startAwakeTimer();
+        }
+
+        // Update UI
+        function updateUI() {
+            levelDisplay.textContent = gameState.level;
+            xpDisplay.textContent = gameState.xp;
+            xpNeededDisplay.textContent = getXpNeeded(gameState.level);
+            bestJumpDisplay.textContent = gameState.bestJump.toFixed(1);
+            bestDisplay.textContent = gameState.bestJump.toFixed(1);
+            renderSkins();
+        }
+
+        // Render skins
+        function renderSkins() {
+            skinsGrid.innerHTML = '';
+            skins.forEach(skin => {
+                const isUnlocked = gameState.unlockedSkins.includes(skin.id);
+                const isSelected = gameState.currentSkin === skin.id;
+
+                const card = document.createElement('div');
+                card.className = `skin-card ${isSelected ? 'selected' : ''} ${!isUnlocked ? 'locked' : ''}`;
+
+                let previewStyle = '';
+                if (skin.color === 'rainbow') {
+                    previewStyle = 'background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #9400D3); border-radius: 50%;';
+                } else {
+                    previewStyle = `background: ${skin.color}; border-radius: 50%;`;
+                }
+
+                const cooldownReductionPercent = Math.round((1 - skin.cooldownReduction) * 100);
+
+                card.innerHTML = `
+                    <div class="skin-preview">
+                        <div style="width: 50px; height: 40px; margin: 0 auto; ${previewStyle}"></div>
+                    </div>
+                    <div class="skin-name">${skin.name}</div>
+                    <div class="skin-bonus">+${Math.round((skin.bonus - 1) * 100)}% Jump</div>
+                    <div class="skin-cooldown">-${cooldownReductionPercent}% Sleep Time</div>
+                    ${!isUnlocked ? `<div class="skin-unlock">🔒 Unlock at Level ${skin.unlockLevel}</div>` : ''}
+                `;
+
+                if (isUnlocked) {
+                    card.onclick = () => selectSkin(skin.id);
+                }
+
+                skinsGrid.appendChild(card);
+            });
+        }
+
+        // Select skin
+        function selectSkin(skinId) {
+            if (gameState.unlockedSkins.includes(skinId)) {
+                gameState.currentSkin = skinId;
+                frog.className = `frog skin-${skinId}`;
+                updateUI();
+                saveGame();
+            }
+        }
+
+        // Power charging
+        let chargeInterval;
+
+        function startCharging() {
+            if (gameState.isJumping || isSleeping) return;
+            gameState.isCharging = true;
+            gameState.power = 0;
+
+            chargeInterval = setInterval(() => {
+                gameState.power = Math.min(100, gameState.power + 2);
+                powerBar.style.width = gameState.power + '%';
+                powerPercent.textContent = gameState.power;
+            }, 30);
+        }
+
+        function stopCharging() {
+            if (!gameState.isCharging) return;
+            gameState.isCharging = false;
+            clearInterval(chargeInterval);
+
+            if (gameState.power > 0) {
+                performJump();
+            }
+        }
+
+        // Perform jump
+        function performJump() {
+            gameState.isJumping = true;
+            jumpBtn.disabled = true;
+
+            const skinBonus = getSkinBonus();
+            const baseDistance = (gameState.power / 100) * 15; // Max 15m base
+            const totalDistance = baseDistance * skinBonus;
+            const pixelDistance = totalDistance * 30; // 30 pixels per meter
+
+            // Set CSS variables for animation
+            frog.style.setProperty('--jump-distance', `${pixelDistance}px`);
+            frog.style.setProperty('--jump-distance-30', `${pixelDistance * 0.3}px`);
+            frog.style.setProperty('--jump-distance-60', `${pixelDistance * 0.6}px`);
+
+            frog.classList.add('jumping');
+
+            setTimeout(() => {
+                frog.classList.remove('jumping');
+                frog.style.left = `${50 + pixelDistance}px`;
+
+                // Calculate XP
+                const xpGained = Math.floor(totalDistance * 5);
+
+                // Check for new best
+                const isNewBest = totalDistance > gameState.bestJump;
+                if (isNewBest) {
+                    gameState.bestJump = totalDistance;
+                }
+
+                // Add XP and check level up
+                const oldLevel = gameState.level;
+                gameState.xp += xpGained;
+
+                while (gameState.xp >= getXpNeeded(gameState.level)) {
+                    gameState.xp -= getXpNeeded(gameState.level);
+                    gameState.level++;
+                }
+
+                const levelsGained = gameState.level - oldLevel;
+
+                // Check for skin unlocks
+                const newUnlocks = [];
+                skins.forEach(skin => {
+                    if (gameState.level >= skin.unlockLevel && !gameState.unlockedSkins.includes(skin.id)) {
+                        gameState.unlockedSkins.push(skin.id);
+                        newUnlocks.push(skin.name);
+                    }
+                });
+
+                // Show result popup
+                showResult(totalDistance, xpGained, levelsGained, newUnlocks, isNewBest);
+
+                saveGame();
+                updateUI();
+            }, 1000);
+        }
+
+        // Show result popup
+        function showResult(distance, xp, levelsGained, newUnlocks, isNewBest) {
+            resultDistance.textContent = distance.toFixed(1);
+            resultXp.textContent = xp;
+
+            if (levelsGained > 0) {
+                levelUpMsg.style.display = 'block';
+                levelUpMsg.textContent = `🎉 LEVEL UP! Now Level ${gameState.level}!`;
+            } else {
+                levelUpMsg.style.display = 'none';
+            }
+
+            if (newUnlocks.length > 0) {
+                unlockMsg.style.display = 'block';
+                unlockMsg.textContent = `🎨 Unlocked: ${newUnlocks.join(', ')}!`;
+            } else {
+                unlockMsg.style.display = 'none';
+            }
+
+            if (isNewBest) {
+                resultPopup.querySelector('h2').textContent = '🏆 New Record!';
+            } else {
+                resultPopup.querySelector('h2').textContent = 'Great Jump!';
+            }
+
+            overlay.style.display = 'block';
+            resultPopup.style.display = 'block';
+        }
+
+        // Continue after result
+        function continueGame() {
+            overlay.style.display = 'none';
+            resultPopup.style.display = 'none';
+
+            // Reset frog position
+            frog.style.left = '50px';
+            powerBar.style.width = '0%';
+            powerPercent.textContent = '0';
+            gameState.power = 0;
+            gameState.isJumping = false;
+            jumpBtn.disabled = false;
+        }
+
+        // Save game
+        function saveGame() {
+            localStorage.setItem('froggyJump', JSON.stringify(gameState));
+        }
+
+        // Load game
+        function loadGame() {
+            const saved = localStorage.getItem('froggyJump');
+            if (saved) {
+                const data = JSON.parse(saved);
+                Object.assign(gameState, data);
+                frog.className = `frog skin-${gameState.currentSkin}`;
+            }
+            updateUI();
+        }
+
+        // Event listeners
+        jumpBtn.addEventListener('mousedown', startCharging);
+        jumpBtn.addEventListener('mouseup', stopCharging);
+        jumpBtn.addEventListener('mouseleave', stopCharging);
+        jumpBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startCharging();
+        });
+        jumpBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            stopCharging();
+        });
+
+        continueBtn.addEventListener('click', continueGame);
+        overlay.addEventListener('click', continueGame);
+
+        // Initialize
+        loadGame();
+        updateAwakeDisplay();
+        startAwakeTimer();
+    </script>
+</body>
+</html>
