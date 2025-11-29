@@ -23,64 +23,91 @@
         .game-container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
         }
 
         .header {
-            text-align: center;
-            padding: 20px;
+            padding: 12px 15px;
             background: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            margin-bottom: 20px;
+            border-radius: 15px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .header h1 {
             color: #2E8B57;
-            font-size: 2.5em;
+            font-size: 2em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 0.75em;
+            color: #FF69B4;
+            max-width: 140px;
+            line-height: 1.3;
+            text-align: left;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .subtitle::before {
+            content: '✨ ';
+        }
+
+        .subtitle::after {
+            content: ' 💕';
         }
 
         .stats {
             display: flex;
             justify-content: space-around;
-            margin-top: 15px;
+            margin-top: 10px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
         .stat-box {
             background: linear-gradient(135deg, #90EE90, #32CD32);
-            padding: 10px 25px;
-            border-radius: 15px;
+            padding: 6px 15px;
+            border-radius: 12px;
             color: white;
             font-weight: bold;
+            font-size: 0.9em;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         .game-area {
             background: linear-gradient(180deg, #87CEEB 0%, #90EE90 60%, #654321 100%);
-            border-radius: 20px;
-            height: 400px;
+            border-radius: 15px;
+            height: 350px;
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .ground {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 80px;
+            height: 60px;
             background: linear-gradient(180deg, #8B4513, #654321);
         }
 
         .grass {
             position: absolute;
-            bottom: 70px;
+            bottom: 52px;
             width: 100%;
-            height: 30px;
+            height: 25px;
             background: repeating-linear-gradient(
                 90deg,
                 #228B22 0px,
@@ -92,7 +119,7 @@
 
         .frog {
             position: absolute;
-            bottom: 100px;
+            bottom: 77px;
             left: 50px;
             width: 60px;
             height: 50px;
@@ -444,23 +471,23 @@
 
         .distance-marker {
             position: absolute;
-            bottom: 85px;
-            font-size: 14px;
+            bottom: 65px;
+            font-size: 12px;
             color: #654321;
             font-weight: bold;
         }
 
         .jump-button {
             display: block;
-            width: 200px;
-            margin: 0 auto 20px;
-            padding: 20px 40px;
-            font-size: 1.5em;
+            width: 180px;
+            margin: 0 auto 10px;
+            padding: 14px 30px;
+            font-size: 1.3em;
             font-family: inherit;
             background: linear-gradient(135deg, #FF6B6B, #FF8E53);
             color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 25px;
             cursor: pointer;
             box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
             transition: all 0.3s;
@@ -484,16 +511,16 @@
         .power-bar-container {
             width: 80%;
             max-width: 400px;
-            margin: 0 auto 20px;
+            margin: 0 auto 10px;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            padding: 5px;
+            border-radius: 12px;
+            padding: 4px;
         }
 
         .power-bar {
-            height: 30px;
+            height: 22px;
             background: linear-gradient(90deg, #FFD700, #FF6B6B, #FF0000);
-            border-radius: 10px;
+            border-radius: 8px;
             width: 0%;
             transition: width 0.05s;
         }
@@ -502,33 +529,35 @@
             text-align: center;
             color: #2E8B57;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
+            font-size: 0.9em;
         }
 
         .skins-panel {
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 15px;
+            padding: 12px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .skins-panel h2 {
             text-align: center;
             color: #2E8B57;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
         }
 
         .skins-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
         }
 
         .skin-card {
             background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-            border-radius: 15px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
@@ -555,25 +584,26 @@
         }
 
         .skin-preview {
-            width: 60px;
-            height: 50px;
-            margin: 0 auto 10px;
+            width: 45px;
+            height: 36px;
+            margin: 0 auto 6px;
             position: relative;
         }
 
         .skin-name {
             font-weight: bold;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
+            font-size: 0.85em;
         }
 
         .skin-bonus {
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: #FF6B6B;
         }
 
         .skin-unlock {
-            font-size: 0.8em;
+            font-size: 0.7em;
             color: #666;
         }
 
@@ -678,8 +708,8 @@
         .instructions {
             text-align: center;
             color: #2E8B57;
-            margin-bottom: 10px;
-            font-size: 1.1em;
+            margin-bottom: 6px;
+            font-size: 0.9em;
         }
 
         .clouds {
@@ -859,194 +889,59 @@
         /* Mobile Responsive Styles */
         @media (max-width: 600px) {
             .game-container {
-                padding: 10px;
+                padding: 8px;
             }
 
             .header {
-                padding: 15px;
-                border-radius: 15px;
-                margin-bottom: 15px;
-            }
-
-            .header h1 {
-                font-size: 1.6em;
-            }
-
-            .stats {
-                gap: 8px;
-            }
-
-            .stat-box {
-                padding: 8px 12px;
-                font-size: 0.85em;
-                border-radius: 10px;
-            }
-
-            .game-area {
-                height: 300px;
-                border-radius: 15px;
-                margin-bottom: 15px;
-            }
-
-            .ground {
-                height: 60px;
-            }
-
-            .grass {
-                bottom: 50px;
-                height: 25px;
-            }
-
-            .frog {
-                bottom: 75px;
-                left: 30px;
-                width: 45px;
-                height: 38px;
-                transform: scale(0.8);
-                transform-origin: bottom left;
-            }
-
-            .distance-marker {
-                font-size: 11px;
-                bottom: 65px;
-            }
-
-            .best-distance {
-                padding: 6px 10px;
-                font-size: 0.8em;
-                border-radius: 8px;
-            }
-
-            .awake-timer {
-                padding: 6px 10px;
-                font-size: 0.8em;
-                border-radius: 8px;
-            }
-
-            .sleep-message {
-                font-size: 1.3em;
-            }
-
-            .sleep-countdown {
-                font-size: 2em;
-            }
-
-            .instructions {
-                font-size: 0.95em;
+                padding: 10px;
+                border-radius: 12px;
                 margin-bottom: 8px;
             }
 
-            .power-bar-container {
-                width: 90%;
-                margin-bottom: 15px;
-            }
-
-            .power-bar {
-                height: 25px;
-            }
-
-            .power-label {
-                font-size: 0.9em;
-            }
-
-            .jump-button {
-                width: 180px;
-                padding: 15px 30px;
-                font-size: 1.2em;
-                border-radius: 25px;
-                margin-bottom: 15px;
-            }
-
-            .skins-panel {
-                padding: 15px;
-                border-radius: 15px;
-            }
-
-            .skins-panel h2 {
-                font-size: 1.2em;
-                margin-bottom: 12px;
-            }
-
-            .skins-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .title-row {
                 gap: 10px;
             }
 
-            .skin-card {
-                padding: 10px;
-                border-radius: 12px;
-            }
-
-            .skin-preview {
-                width: 45px;
-                height: 38px;
-                margin-bottom: 8px;
-            }
-
-            .skin-name {
-                font-size: 0.85em;
-            }
-
-            .skin-bonus,
-            .skin-cooldown,
-            .skin-unlock {
-                font-size: 0.75em;
-            }
-
-            .result-popup {
-                padding: 25px;
-                border-radius: 20px;
-                width: 90%;
-                max-width: 320px;
-            }
-
-            .result-popup h2 {
-                font-size: 1.5em;
-                margin-bottom: 10px;
-            }
-
-            .result-distance {
-                font-size: 2.2em;
-                margin-bottom: 8px;
-            }
-
-            .result-xp {
-                font-size: 1em;
-                margin-bottom: 15px;
-            }
-
-            .level-up,
-            .unlock-notification {
-                padding: 8px 15px;
-                font-size: 0.9em;
-                margin-bottom: 12px;
-            }
-
-            .continue-btn {
-                padding: 12px 30px;
-                font-size: 1em;
-                border-radius: 15px;
-            }
-        }
-
-        @media (max-width: 400px) {
             .header h1 {
                 font-size: 1.4em;
             }
 
+            .subtitle {
+                font-size: 0.65em;
+                max-width: 110px;
+            }
+
+            .stats {
+                gap: 6px;
+                margin-top: 8px;
+            }
+
             .stat-box {
-                padding: 6px 10px;
-                font-size: 0.75em;
+                padding: 5px 10px;
+                font-size: 0.8em;
+                border-radius: 8px;
             }
 
             .game-area {
-                height: 250px;
+                height: 280px;
+                border-radius: 12px;
+                margin-bottom: 8px;
+            }
+
+            .ground {
+                height: 50px;
+            }
+
+            .grass {
+                bottom: 42px;
+                height: 20px;
             }
 
             .frog {
-                bottom: 65px;
-                left: 20px;
-                transform: scale(0.7);
+                bottom: 62px;
+                left: 25px;
+                transform: scale(0.75);
+                transform-origin: bottom left;
             }
 
             .distance-marker {
@@ -1054,14 +949,162 @@
                 bottom: 55px;
             }
 
-            .skins-grid {
-                grid-template-columns: 1fr 1fr;
+            .best-distance {
+                padding: 5px 8px;
+                font-size: 0.75em;
+                border-radius: 6px;
+            }
+
+            .awake-timer {
+                padding: 5px 8px;
+                font-size: 0.75em;
+                border-radius: 6px;
+            }
+
+            .sleep-message {
+                font-size: 1.2em;
+            }
+
+            .sleep-countdown {
+                font-size: 1.8em;
+            }
+
+            .instructions {
+                font-size: 0.8em;
+                margin-bottom: 5px;
+            }
+
+            .power-bar-container {
+                width: 90%;
+                margin-bottom: 8px;
+            }
+
+            .power-bar {
+                height: 20px;
+            }
+
+            .power-label {
+                font-size: 0.8em;
             }
 
             .jump-button {
                 width: 160px;
                 padding: 12px 25px;
                 font-size: 1.1em;
+                border-radius: 20px;
+                margin-bottom: 8px;
+            }
+
+            .skins-panel {
+                padding: 10px;
+                border-radius: 12px;
+            }
+
+            .skins-panel h2 {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+
+            .skins-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .skin-card {
+                padding: 8px;
+                border-radius: 10px;
+            }
+
+            .skin-preview {
+                width: 35px;
+                height: 28px;
+                margin-bottom: 4px;
+            }
+
+            .skin-name {
+                font-size: 0.7em;
+            }
+
+            .skin-bonus,
+            .skin-cooldown,
+            .skin-unlock {
+                font-size: 0.65em;
+            }
+
+            .result-popup {
+                padding: 20px;
+                border-radius: 15px;
+                width: 90%;
+                max-width: 300px;
+            }
+
+            .result-popup h2 {
+                font-size: 1.3em;
+                margin-bottom: 8px;
+            }
+
+            .result-distance {
+                font-size: 2em;
+                margin-bottom: 6px;
+            }
+
+            .result-xp {
+                font-size: 0.95em;
+                margin-bottom: 12px;
+            }
+
+            .level-up,
+            .unlock-notification {
+                padding: 6px 12px;
+                font-size: 0.85em;
+                margin-bottom: 10px;
+            }
+
+            .continue-btn {
+                padding: 10px 25px;
+                font-size: 0.95em;
+                border-radius: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .header h1 {
+                font-size: 1.2em;
+            }
+
+            .subtitle {
+                font-size: 0.6em;
+                max-width: 100px;
+            }
+
+            .stat-box {
+                padding: 4px 8px;
+                font-size: 0.7em;
+            }
+
+            .game-area {
+                height: 240px;
+            }
+
+            .frog {
+                bottom: 55px;
+                left: 20px;
+                transform: scale(0.65);
+            }
+
+            .distance-marker {
+                font-size: 9px;
+                bottom: 48px;
+            }
+
+            .skins-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .jump-button {
+                width: 150px;
+                padding: 10px 20px;
+                font-size: 1em;
             }
         }
     </style>
@@ -1069,7 +1112,10 @@
 <body>
     <div class="game-container">
         <div class="header">
-            <h1>🐸 Froggy Jump! 🐸</h1>
+            <div class="title-row">
+                <h1>🐸 Froggy Jump! 🐸</h1>
+                <div class="subtitle">A game made by Claire Rowe on her uncle's laptop</div>
+            </div>
             <div class="stats">
                 <div class="stat-box">Level: <span id="level">1</span></div>
                 <div class="stat-box">XP: <span id="xp">0</span>/<span id="xp-needed">100</span></div>
