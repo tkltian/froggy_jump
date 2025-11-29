@@ -485,8 +485,10 @@
         }
 
         .jump-button {
-            display: block;
-            padding: 14px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 25px;
             font-size: 1.2em;
             font-family: inherit;
             background: linear-gradient(135deg, #FF6B6B, #FF8E53);
@@ -501,6 +503,13 @@
             touch-action: manipulation;
             -webkit-touch-callout: none;
             white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .btn-subtext {
+            font-size: 0.55em;
+            opacity: 0.9;
+            margin-top: 2px;
         }
 
         .jump-button:hover {
@@ -1210,7 +1219,7 @@
                 <div class="power-label">Power: <span id="power-percent">0</span>%</div>
                 <div class="power-bar" id="power-bar"></div>
             </div>
-            <button class="jump-button" id="jump-btn">🐸 HOLD!</button>
+            <button class="jump-button" id="jump-btn">🐸 HOLD!<span class="btn-subtext">to jump!</span></button>
         </div>
 
         <div class="skins-panel">
