@@ -128,10 +128,11 @@
             position: absolute;
             bottom: 77px;
             left: 50px;
-            width: 60px;
-            height: 50px;
+            width: 45px;
+            height: 38px;
             transition: transform 0.1s;
             z-index: 10;
+            transform-origin: bottom center;
         }
 
         .frog.jumping {
@@ -504,31 +505,55 @@
             height: 100%;
         }
 
-        /* Regular Labubu - Pink cute monster */
-        .labubu-regular .labubu-head {
+        /* Labubu color variants - base styles */
+        .labubu-pink .labubu-head,
+        .labubu-red .labubu-head,
+        .labubu-blue .labubu-head,
+        .labubu-green .labubu-head,
+        .labubu-yellow .labubu-head,
+        .labubu-purple .labubu-head {
             position: absolute;
             width: 26px;
             height: 22px;
-            background: linear-gradient(180deg, #FFB6C1, #FF91A4);
             border-radius: 50% 50% 45% 45%;
             top: 0;
             left: 2px;
             box-shadow: inset 0 -3px 6px rgba(0,0,0,0.1);
         }
 
-        .labubu-regular .labubu-ear {
+        .labubu-pink .labubu-ear,
+        .labubu-red .labubu-ear,
+        .labubu-blue .labubu-ear,
+        .labubu-green .labubu-ear,
+        .labubu-yellow .labubu-ear,
+        .labubu-purple .labubu-ear {
             position: absolute;
             width: 8px;
             height: 12px;
-            background: linear-gradient(180deg, #FFB6C1, #FF91A4);
             border-radius: 50% 50% 30% 30%;
             top: -8px;
         }
 
-        .labubu-regular .labubu-ear.left { left: 3px; transform: rotate(-15deg); }
-        .labubu-regular .labubu-ear.right { right: 3px; transform: rotate(15deg); }
+        .labubu-pink .labubu-ear.left,
+        .labubu-red .labubu-ear.left,
+        .labubu-blue .labubu-ear.left,
+        .labubu-green .labubu-ear.left,
+        .labubu-yellow .labubu-ear.left,
+        .labubu-purple .labubu-ear.left { left: 3px; transform: rotate(-15deg); }
 
-        .labubu-regular .labubu-eye {
+        .labubu-pink .labubu-ear.right,
+        .labubu-red .labubu-ear.right,
+        .labubu-blue .labubu-ear.right,
+        .labubu-green .labubu-ear.right,
+        .labubu-yellow .labubu-ear.right,
+        .labubu-purple .labubu-ear.right { right: 3px; transform: rotate(15deg); }
+
+        .labubu-pink .labubu-eye,
+        .labubu-red .labubu-eye,
+        .labubu-blue .labubu-eye,
+        .labubu-green .labubu-eye,
+        .labubu-yellow .labubu-eye,
+        .labubu-purple .labubu-eye {
             position: absolute;
             width: 6px;
             height: 7px;
@@ -537,10 +562,26 @@
             top: 8px;
         }
 
-        .labubu-regular .labubu-eye.left { left: 6px; }
-        .labubu-regular .labubu-eye.right { right: 6px; }
+        .labubu-pink .labubu-eye.left,
+        .labubu-red .labubu-eye.left,
+        .labubu-blue .labubu-eye.left,
+        .labubu-green .labubu-eye.left,
+        .labubu-yellow .labubu-eye.left,
+        .labubu-purple .labubu-eye.left { left: 6px; }
 
-        .labubu-regular .labubu-eye::after {
+        .labubu-pink .labubu-eye.right,
+        .labubu-red .labubu-eye.right,
+        .labubu-blue .labubu-eye.right,
+        .labubu-green .labubu-eye.right,
+        .labubu-yellow .labubu-eye.right,
+        .labubu-purple .labubu-eye.right { right: 6px; }
+
+        .labubu-pink .labubu-eye::after,
+        .labubu-red .labubu-eye::after,
+        .labubu-blue .labubu-eye::after,
+        .labubu-green .labubu-eye::after,
+        .labubu-yellow .labubu-eye::after,
+        .labubu-purple .labubu-eye::after {
             content: '';
             position: absolute;
             width: 2px;
@@ -551,7 +592,12 @@
             left: 1px;
         }
 
-        .labubu-regular .labubu-mouth {
+        .labubu-pink .labubu-mouth,
+        .labubu-red .labubu-mouth,
+        .labubu-blue .labubu-mouth,
+        .labubu-green .labubu-mouth,
+        .labubu-yellow .labubu-mouth,
+        .labubu-purple .labubu-mouth {
             position: absolute;
             width: 8px;
             height: 4px;
@@ -562,15 +608,49 @@
             left: 9px;
         }
 
-        .labubu-regular .labubu-body-main {
+        .labubu-pink .labubu-body-main,
+        .labubu-red .labubu-body-main,
+        .labubu-blue .labubu-body-main,
+        .labubu-green .labubu-body-main,
+        .labubu-yellow .labubu-body-main,
+        .labubu-purple .labubu-body-main {
             position: absolute;
             width: 22px;
             height: 16px;
-            background: linear-gradient(180deg, #FF91A4, #FF7086);
             border-radius: 40% 40% 50% 50%;
             top: 18px;
             left: 4px;
         }
+
+        /* Pink Labubu */
+        .labubu-pink .labubu-head { background: linear-gradient(180deg, #FFB6C1, #FF91A4); }
+        .labubu-pink .labubu-ear { background: linear-gradient(180deg, #FFB6C1, #FF91A4); }
+        .labubu-pink .labubu-body-main { background: linear-gradient(180deg, #FF91A4, #FF7086); }
+
+        /* Red Labubu */
+        .labubu-red .labubu-head { background: linear-gradient(180deg, #FF6B6B, #E74C3C); }
+        .labubu-red .labubu-ear { background: linear-gradient(180deg, #FF6B6B, #E74C3C); }
+        .labubu-red .labubu-body-main { background: linear-gradient(180deg, #E74C3C, #C0392B); }
+
+        /* Blue Labubu */
+        .labubu-blue .labubu-head { background: linear-gradient(180deg, #74B9FF, #0984E3); }
+        .labubu-blue .labubu-ear { background: linear-gradient(180deg, #74B9FF, #0984E3); }
+        .labubu-blue .labubu-body-main { background: linear-gradient(180deg, #0984E3, #0652DD); }
+
+        /* Green Labubu */
+        .labubu-green .labubu-head { background: linear-gradient(180deg, #55EFC4, #00B894); }
+        .labubu-green .labubu-ear { background: linear-gradient(180deg, #55EFC4, #00B894); }
+        .labubu-green .labubu-body-main { background: linear-gradient(180deg, #00B894, #009432); }
+
+        /* Yellow Labubu */
+        .labubu-yellow .labubu-head { background: linear-gradient(180deg, #FFEAA7, #FDCB6E); }
+        .labubu-yellow .labubu-ear { background: linear-gradient(180deg, #FFEAA7, #FDCB6E); }
+        .labubu-yellow .labubu-body-main { background: linear-gradient(180deg, #FDCB6E, #F39C12); }
+
+        /* Purple Labubu */
+        .labubu-purple .labubu-head { background: linear-gradient(180deg, #A29BFE, #6C5CE7); }
+        .labubu-purple .labubu-ear { background: linear-gradient(180deg, #A29BFE, #6C5CE7); }
+        .labubu-purple .labubu-body-main { background: linear-gradient(180deg, #6C5CE7, #5341D6); }
 
         /* Limited Edition Labubu - Black with gold accents */
         .labubu-limited .labubu-head {
@@ -706,37 +786,315 @@
             margin-top: 15px;
         }
 
-        /* Labubu game hint */
+        /* Labubu game hint - NOT USED anymore, replaced by distance-summary */
         .labubu-hint {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #FFB6C1, #FF91A4);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 0.95em;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
-            z-index: 150;
-            animation: hintBounce 2s ease-in-out infinite;
+            display: none !important;
+            visibility: hidden;
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
         }
 
         .labubu-hint.show {
-            display: block;
+            display: none !important;
         }
 
-        @keyframes hintBounce {
+        .labubu-hint-arrow {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            animation: arrowBounce 0.8s ease-in-out infinite;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+
+        @keyframes arrowBounce {
             0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-5px); }
+            50% { transform: translateX(-50%) translateY(3px); }
         }
 
         @keyframes bonusPop {
             0% { transform: scale(0); }
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
+        }
+
+        /* Terrain Patches */
+        .terrain-patch {
+            position: absolute;
+            bottom: 52px;
+            height: 25px;
+            z-index: 2;
+        }
+
+        /* Snow terrain */
+        .terrain-snow {
+            background: linear-gradient(180deg, #FFFFFF 0%, #E8F4F8 50%, #D0E8F0 100%);
+            border-radius: 10px 10px 0 0;
+            box-shadow: inset 0 -3px 8px rgba(200, 230, 255, 0.5);
+        }
+
+        .terrain-snow::before {
+            content: '❄';
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
+        /* Ice terrain */
+        .terrain-ice {
+            background: linear-gradient(180deg, rgba(173, 216, 230, 0.9) 0%, rgba(135, 206, 250, 0.95) 50%, rgba(100, 149, 237, 0.9) 100%);
+            border-radius: 5px 5px 0 0;
+            box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(135, 206, 250, 0.4);
+        }
+
+        .terrain-ice::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            border-radius: 2px;
+        }
+
+        /* Lava terrain */
+        .terrain-lava {
+            background: linear-gradient(180deg, #FF4500 0%, #FF6B35 30%, #FF8C00 60%, #FFD700 100%);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.6), inset 0 -5px 15px rgba(139, 0, 0, 0.5);
+            animation: lavaGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        .terrain-lava::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,0,0.3) 0%, transparent 40%),
+                        radial-gradient(ellipse at 70% 30%, rgba(255,200,0,0.3) 0%, transparent 35%);
+            animation: lavaBubble 2s ease-in-out infinite;
+        }
+
+        @keyframes lavaGlow {
+            0% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.5), inset 0 -5px 15px rgba(139, 0, 0, 0.5); }
+            100% { box-shadow: 0 0 25px rgba(255, 100, 0, 0.7), inset 0 -5px 15px rgba(139, 0, 0, 0.5); }
+        }
+
+        @keyframes lavaBubble {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Snow splash effect */
+        .snow-splash {
+            position: absolute;
+            bottom: 60px;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .snow-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: snowSplash 0.6s ease-out forwards;
+        }
+
+        @keyframes snowSplash {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--splash-x), var(--splash-y)) scale(0.3); opacity: 0; }
+        }
+
+        /* Ice slide effect */
+        .frog.sliding {
+            animation: slideWobble 0.1s ease-in-out infinite alternate;
+        }
+
+        @keyframes slideWobble {
+            0% { transform: rotate(-2deg); }
+            100% { transform: rotate(2deg); }
+        }
+
+        .ice-trail {
+            position: absolute;
+            bottom: 60px;
+            height: 5px;
+            background: linear-gradient(90deg, rgba(135, 206, 250, 0.6), rgba(135, 206, 250, 0));
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Lava death effect */
+        .frog.burning {
+            animation: burn 0.5s ease-in-out;
+        }
+
+        @keyframes burn {
+            0% { filter: brightness(1); }
+            25% { filter: brightness(2) hue-rotate(-30deg); }
+            50% { filter: brightness(1.5) hue-rotate(-60deg); transform: scale(0.9); }
+            75% { filter: brightness(0.8); transform: scale(0.7); }
+            100% { filter: brightness(0.5); transform: scale(0.5); opacity: 0.5; }
+        }
+
+        .lava-death-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 69, 0, 0.3), transparent 70%);
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        .lava-death-overlay.active {
+            display: block;
+            animation: lavaFlash 0.5s ease-out;
+        }
+
+        @keyframes lavaFlash {
+            0% { opacity: 0; }
+            30% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Preview overlay */
+        .preview-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 60;
+            pointer-events: none;
+        }
+
+        .preview-overlay.active {
+            display: block;
+        }
+
+        .preview-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: previewPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes previewPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        /* Terrain highlight during preview */
+        .terrain-highlight {
+            position: absolute;
+            bottom: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+            white-space: nowrap;
+            z-index: 65;
+            animation: highlightBounce 0.5s ease-out;
+        }
+
+        @keyframes highlightBounce {
+            0% { transform: translateY(10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .terrain-highlight.snow { background: #E8F4F8; color: #4A90A4; }
+        .terrain-highlight.ice { background: #D0E8FF; color: #2E6B8A; }
+        .terrain-highlight.lava { background: #FFE0D0; color: #CC3300; }
+        .terrain-highlight.labubu { background: #FFE4EC; color: #E91E63; }
+        .terrain-highlight.secret { background: #2a2a2a; color: gold; }
+
+        /* Persistent distance markers (shown after preview) */
+        .distance-label {
+            position: absolute;
+            bottom: 80px;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 0.65em;
+            font-weight: bold;
+            white-space: nowrap;
+            z-index: 40;
+            pointer-events: none;
+        }
+
+        .distance-label.ice { border-left: 3px solid #87CEEB; }
+        .distance-label.lava { border-left: 3px solid #FF4500; }
+        .distance-label.snow { border-left: 3px solid #E8F4F8; }
+        .distance-label.labubu { border-left: 3px solid #FF69B4; }
+        .distance-label.secret { border-left: 3px solid gold; background: rgba(0,0,0,0.8); }
+
+        /* Distance summary panel - fixed position top left, dynamic width */
+        .distance-summary {
+            display: none;
+            position: absolute;
+            top: 45px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.75em;
+            z-index: 55;
+        }
+
+        .distance-summary.show {
+            display: inline-block;
+        }
+
+        .distance-summary-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #90EE90;
+        }
+
+        .distance-summary-item {
+            white-space: nowrap;
+            margin-bottom: 3px;
+        }
+
+        .distance-summary-item.type-lava { color: #FF6B6B; }
+        .distance-summary-item.type-ice { color: #87CEEB; }
+        .distance-summary-item.type-labubu { color: #FFB6C1; }
+
+        .secret-distance {
+            color: #FF4444;
+            font-weight: bold;
         }
 
         @keyframes fadeIn {
@@ -870,10 +1228,19 @@
         }
 
         .skin-preview {
-            width: 45px;
-            height: 36px;
+            width: 40px;
+            height: 32px;
             margin: 0 auto 6px;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skin-preview-circle {
+            width: 30px;
+            height: 24px;
+            border-radius: 50%;
         }
 
         .skin-name {
@@ -899,13 +1266,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 30px;
             border-radius: 25px;
             text-align: center;
             z-index: 100;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             animation: popIn 0.3s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         @keyframes popIn {
@@ -976,7 +1346,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.25);
             z-index: 99;
         }
 
@@ -1219,8 +1589,8 @@
             .frog {
                 bottom: 62px;
                 left: 25px;
-                transform: scale(0.75);
-                transform-origin: bottom left;
+                width: 35px;
+                height: 30px;
             }
 
             .distance-marker {
@@ -1238,6 +1608,12 @@
                 padding: 5px 8px;
                 font-size: 0.75em;
                 border-radius: 6px;
+            }
+
+            .distance-summary {
+                font-size: 0.6em;
+                padding: 6px 10px;
+                top: 38px;
             }
 
             .sleep-message {
@@ -1291,9 +1667,14 @@
             }
 
             .skin-preview {
-                width: 35px;
-                height: 28px;
+                width: 28px;
+                height: 22px;
                 margin-bottom: 4px;
+            }
+
+            .skin-preview-circle {
+                width: 22px;
+                height: 18px;
             }
 
             .skin-name {
@@ -1364,7 +1745,8 @@
             .frog {
                 bottom: 55px;
                 left: 20px;
-                transform: scale(0.65);
+                width: 30px;
+                height: 25px;
             }
 
             .distance-marker {
@@ -1407,6 +1789,9 @@
             <div class="best-distance">🏆 Best: <span id="best-display">0</span>m</div>
             <div class="awake-timer" id="awake-timer">Energy: 2:00</div>
 
+            <!-- Distance summary panel -->
+            <div class="distance-summary" id="distance-summary"></div>
+
             <div class="sleep-overlay" id="sleep-overlay">
                 <div class="zzz-container">
                     <span class="zzz">Z</span>
@@ -1420,12 +1805,29 @@
                 </div>
             </div>
 
+            <!-- Preview overlay -->
+            <div class="preview-overlay" id="preview-overlay">
+                <div class="preview-badge" id="preview-badge">🔍 PREVIEW</div>
+            </div>
+
+            <!-- Lava death overlay -->
+            <div class="lava-death-overlay" id="lava-death-overlay"></div>
+
             <div class="game-world" id="game-world">
                 <div class="grass"></div>
                 <div class="ground"></div>
 
+                <!-- Terrain patches container -->
+                <div id="terrain-container"></div>
+
                 <!-- Labubu toys container -->
                 <div id="labubu-container"></div>
+
+                <!-- Terrain highlights container (for preview) -->
+                <div id="highlights-container"></div>
+
+                <!-- Persistent distance labels (after preview) -->
+                <div id="distance-labels-container"></div>
 
                 <div class="frog skin-default" id="frog">
                     <div class="frog-body">
@@ -1513,7 +1915,8 @@
 
     <!-- Labubu hint tooltip -->
     <div class="labubu-hint" id="labubu-hint">
-        🎁 Aim for the Labubu toys for bonus XP!
+        🎁 Aim for the Labubu!
+        <div class="labubu-hint-arrow">👇</div>
     </div>
 
     <script>
@@ -1582,12 +1985,31 @@
         const labubuRevealBonus = document.getElementById('labubu-reveal-bonus');
         const labubuHint = document.getElementById('labubu-hint');
 
+        // Terrain DOM elements
+        const terrainContainer = document.getElementById('terrain-container');
+        const highlightsContainer = document.getElementById('highlights-container');
+        const distanceLabelsContainer = document.getElementById('distance-labels-container');
+        const distanceSummary = document.getElementById('distance-summary');
+        const previewOverlay = document.getElementById('preview-overlay');
+        const previewBadge = document.getElementById('preview-badge');
+        const lavaDeathOverlay = document.getElementById('lava-death-overlay');
+
+        // Terrain state
+        let activeTerrains = [];
+        let isPreviewPlaying = false;
+        const TERRAIN_TYPES = ['snow', 'ice', 'lava'];
+        const LAVA_XP_PENALTY = 100;
+        const ICE_SLIDE_FACTOR = 0.9; // Slide 90% of landing speed (very slippery!)
+
         // Labubu state
         let activeLabubus = [];
-        let hasShownLabubuHint = false;
         const LABUBU_CATCH_DISTANCE = 50; // pixels - how close frog needs to land
-        const LABUBU_REGULAR_BONUS = 50;
-        const LABUBU_LIMITED_BONUS = 500;
+        const LABUBU_BASE_BONUS = 30; // Base bonus for nearby Labubu
+        const LABUBU_DISTANCE_MULTIPLIER = 2; // XP per meter of distance
+        const LABUBU_LIMITED_MULTIPLIER = 10; // Secret edition multiplier
+
+        // Labubu colors with probabilities
+        const LABUBU_COLORS = ['pink', 'red', 'blue', 'green', 'yellow', 'purple'];
 
         // Create Labubu HTML
         function createLabubuHTML(isLimited) {
@@ -1605,17 +2027,22 @@
             `;
         }
 
-        // Show Labubu hint
-        function showLabubuHintOnce() {
-            if (hasShownLabubuHint) return;
-            hasShownLabubuHint = true;
+        // Show Labubu hint pointing to nearest Labubu
+        function showLabubuHint() {
+            if (activeLabubus.length === 0) return;
 
+            // Find the nearest Labubu
+            const nearestLabubu = activeLabubus.reduce((nearest, current) => {
+                return current.position < nearest.position ? current : nearest;
+            });
+
+            // Position hint above the Labubu within the game area
+            const areaWidth = gameArea.offsetWidth;
+            const hintPosition = Math.min(nearestLabubu.position, areaWidth - 100);
+
+            labubuHint.style.left = `${Math.max(50, hintPosition)}px`;
+            labubuHint.style.transform = 'translateX(-50%)';
             labubuHint.classList.add('show');
-
-            // Auto-hide after 4 seconds
-            setTimeout(() => {
-                labubuHint.classList.remove('show');
-            }, 4000);
         }
 
         // Hide Labubu hint immediately
@@ -1623,38 +2050,56 @@
             labubuHint.classList.remove('show');
         }
 
-        // Spawn Labubu toys
-        function spawnLabubus() {
-            // Clear existing
-            labubuContainer.innerHTML = '';
-            activeLabubus = [];
-
-            // Spawn 2-4 regular Labubus at random positions
-            const numLabubus = 2 + Math.floor(Math.random() * 3);
-
-            for (let i = 0; i < numLabubus; i++) {
-                // Random position between 100px and 2000px (avoiding the start)
-                const position = 150 + Math.floor(Math.random() * 1850);
-
-                // 1/36 chance for limited edition
-                const isLimited = Math.random() < (1/36);
-
-                const labubu = document.createElement('div');
-                labubu.className = `labubu ${isLimited ? 'labubu-limited' : 'labubu-regular'}`;
-                labubu.style.left = `${position}px`;
-                labubu.innerHTML = createLabubuHTML(isLimited);
-
-                labubuContainer.appendChild(labubu);
-                activeLabubus.push({
-                    element: labubu,
-                    position: position,
-                    isLimited: isLimited,
-                    collected: false
-                });
+        // Pan camera to show Labubus before game starts
+        function panToShowLabubus(callback) {
+            if (activeLabubus.length === 0) {
+                if (callback) callback();
+                return;
             }
 
-            // Show hint on first spawn
-            showLabubuHintOnce();
+            // Find the furthest Labubu
+            const furthestLabubu = activeLabubus.reduce((furthest, current) => {
+                return current.position > furthest.position ? current : furthest;
+            });
+
+            const areaWidth = gameArea.offsetWidth;
+
+            // If furthest Labubu is off-screen, pan to show it
+            if (furthestLabubu.position > areaWidth - 100) {
+                const targetOffset = furthestLabubu.position - areaWidth * 0.6;
+                gameWorld.style.transform = `translateX(-${Math.max(0, targetOffset)}px)`;
+
+                // Pan back after a delay
+                setTimeout(() => {
+                    gameWorld.style.transform = 'translateX(0)';
+                    if (callback) callback();
+                }, 1500);
+            } else {
+                if (callback) callback();
+            }
+        }
+
+        // Get random Labubu color class
+        function getRandomLabubuColor() {
+            // 1/36 chance for black (limited edition)
+            if (Math.random() < (1/36)) {
+                return { colorClass: 'labubu-limited', isLimited: true };
+            }
+            // 35/36 chance split among 6 colors (each ~5.83/36 = 35/216)
+            const colorIndex = Math.floor(Math.random() * LABUBU_COLORS.length);
+            return { colorClass: `labubu-${LABUBU_COLORS[colorIndex]}`, isLimited: false };
+        }
+
+        // Calculate distance-based bonus
+        function calculateLabubuBonus(labubu) {
+            const distanceMeters = (labubu.position - 50) / 30; // Convert pixels to meters
+            let bonus = LABUBU_BASE_BONUS + Math.floor(distanceMeters * LABUBU_DISTANCE_MULTIPLIER);
+
+            if (labubu.isLimited) {
+                bonus *= LABUBU_LIMITED_MULTIPLIER;
+            }
+
+            return bonus;
         }
 
         // Check if frog landed near any Labubu
@@ -1677,10 +2122,380 @@
             return collectedLabubu;
         }
 
+        // Check for Labubus during ice slide
+        function checkLabubusDuringSlide(startPos, endPos) {
+            const collected = [];
+            for (const labubu of activeLabubus) {
+                if (labubu.collected) continue;
+                if (labubu.position >= startPos && labubu.position <= endPos) {
+                    labubu.collected = true;
+                    labubu.element.style.opacity = '0.3';
+                    labubu.element.style.transform = 'scale(0.5)';
+                    collected.push(labubu);
+                }
+            }
+            return collected;
+        }
+
+        // Generate terrain patches
+        function generateTerrains() {
+            terrainContainer.innerHTML = '';
+            activeTerrains = [];
+
+            // Generate 3-5 large terrain sections
+            const numPatches = 3 + Math.floor(Math.random() * 3);
+
+            // Divide the play area into zones to spread terrains
+            const zoneSize = 1800 / numPatches;
+
+            for (let i = 0; i < numPatches; i++) {
+                const zoneStart = 200 + i * zoneSize;
+                const position = zoneStart + Math.random() * (zoneSize * 0.3);
+                // Much longer sections: 150-400px wide (5-13 meters)
+                const width = 150 + Math.floor(Math.random() * 250);
+
+                // Weighted random terrain selection
+                // Ice is most common (55%), snow (33%), lava rare (12%)
+                const rand = Math.random();
+                let type;
+                if (rand < 0.12) {
+                    type = 'lava';
+                } else if (rand < 0.67) {
+                    type = 'ice';
+                } else {
+                    type = 'snow';
+                }
+
+                const terrain = document.createElement('div');
+                terrain.className = `terrain-patch terrain-${type}`;
+                terrain.style.left = `${position}px`;
+                terrain.style.width = `${width}px`;
+
+                terrainContainer.appendChild(terrain);
+                activeTerrains.push({
+                    element: terrain,
+                    type: type,
+                    start: position,
+                    end: position + width,
+                    width: width
+                });
+            }
+
+            // Sort terrains by position for easier lookup
+            activeTerrains.sort((a, b) => a.start - b.start);
+        }
+
+        // Get terrain at a specific position
+        function getTerrainAt(position) {
+            for (const terrain of activeTerrains) {
+                if (position >= terrain.start && position <= terrain.end) {
+                    return terrain;
+                }
+            }
+            return null; // Grass (default)
+        }
+
+        // Find where ice slide ends
+        function calculateIceSlideEnd(startPos, slideDistance) {
+            let currentPos = startPos;
+            let remainingSlide = slideDistance;
+
+            while (remainingSlide > 0) {
+                currentPos += 1; // Move pixel by pixel
+                remainingSlide -= 1;
+
+                const terrain = getTerrainAt(currentPos);
+                // Stop sliding if we hit non-ice terrain (or end of ice)
+                if (!terrain || terrain.type !== 'ice') {
+                    // Check if we landed on lava at the end
+                    break;
+                }
+            }
+
+            return currentPos;
+        }
+
+        // Create snow splash effect
+        function createSnowSplash(position) {
+            const splash = document.createElement('div');
+            splash.className = 'snow-splash';
+            splash.style.left = `${position}px`;
+
+            // Create multiple particles
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'snow-particle';
+                const angle = (i / 8) * Math.PI * 2;
+                const distance = 20 + Math.random() * 20;
+                particle.style.setProperty('--splash-x', `${Math.cos(angle) * distance}px`);
+                particle.style.setProperty('--splash-y', `${Math.sin(angle) * distance - 30}px`);
+                particle.style.animationDelay = `${Math.random() * 0.1}s`;
+                splash.appendChild(particle);
+            }
+
+            gameWorld.appendChild(splash);
+
+            // Remove after animation
+            setTimeout(() => splash.remove(), 700);
+        }
+
+        // Create ice trail effect
+        function createIceTrail(startPos, endPos) {
+            const trail = document.createElement('div');
+            trail.className = 'ice-trail';
+            trail.style.left = `${startPos}px`;
+            trail.style.width = `${endPos - startPos}px`;
+
+            gameWorld.appendChild(trail);
+
+            // Fade out and remove
+            setTimeout(() => {
+                trail.style.opacity = '0';
+                trail.style.transition = 'opacity 0.5s';
+                setTimeout(() => trail.remove(), 500);
+            }, 1000);
+        }
+
+        // Convert pixel position to meters (accounting for frog start at 50px)
+        function pixelsToMeters(px) {
+            return Math.round((px - 50) / 30);
+        }
+
+        // Create summary panel after preview (no in-world labels to avoid overlap)
+        function createDistanceLabels() {
+            distanceLabelsContainer.innerHTML = '';
+
+            // Collect ALL terrains by type
+            const iceTerrains = [];
+            const lavaTerrains = [];
+
+            for (const terrain of activeTerrains) {
+                const distanceM = pixelsToMeters(terrain.start);
+                const endM = pixelsToMeters(terrain.end);
+
+                if (terrain.type === 'ice') {
+                    iceTerrains.push(`${distanceM}-${endM}m`);
+                } else if (terrain.type === 'lava') {
+                    lavaTerrains.push(`${distanceM}-${endM}m`);
+                }
+            }
+
+            // Collect Labubus - sort by distance
+            const labubuDistances = activeLabubus
+                .map(l => ({ distance: pixelsToMeters(l.position), isLimited: l.isLimited }))
+                .sort((a, b) => a.distance - b.distance);
+
+            // Build summary panel HTML - Title first, then all items INSIDE the box
+            let summaryHtml = '<div class="distance-summary-title">📍 Targets:</div>';
+
+            // Labubus as array with limited editions highlighted (INSIDE box, after title)
+            if (labubuDistances.length > 0) {
+                const labubuParts = labubuDistances.map(l =>
+                    l.isLimited
+                        ? `<span class="secret-distance">${l.distance}m⭐</span>`
+                        : `${l.distance}m`
+                );
+                summaryHtml += `<div class="distance-summary-item type-labubu">🎁 Labubus: ${labubuParts.join(', ')}</div>`;
+            }
+
+            // Ice terrains (all of them)
+            if (iceTerrains.length > 0) {
+                summaryHtml += `<div class="distance-summary-item type-ice">🧊 Ice: ${iceTerrains.join(', ')}</div>`;
+            }
+
+            // Lava terrains (all of them)
+            if (lavaTerrains.length > 0) {
+                summaryHtml += `<div class="distance-summary-item type-lava">🔥 Lava: ${lavaTerrains.join(', ')}</div>`;
+            }
+
+            distanceSummary.innerHTML = summaryHtml;
+            distanceSummary.classList.add('show');
+        }
+
+        // Hide summary panel
+        function hideDistanceSummary() {
+            distanceSummary.classList.remove('show');
+        }
+
+        // Play preview animation
+        function playPreview(callback) {
+            isPreviewPlaying = true;
+            jumpBtn.disabled = true;
+            previewOverlay.classList.add('active');
+            highlightsContainer.innerHTML = '';
+            distanceLabelsContainer.innerHTML = '';
+            distanceSummary.classList.remove('show');
+            labubuHint.classList.remove('show');
+
+            const areaWidth = gameArea.offsetWidth;
+            let maxPosition = 0;
+
+            // Find the furthest item to preview
+            for (const labubu of activeLabubus) {
+                maxPosition = Math.max(maxPosition, labubu.position);
+            }
+            for (const terrain of activeTerrains) {
+                maxPosition = Math.max(maxPosition, terrain.end);
+            }
+
+            // Calculate preview path
+            const previewStops = [];
+
+            // Add terrain highlights
+            for (const terrain of activeTerrains) {
+                let label = '';
+                let className = terrain.type;
+                const distanceM = pixelsToMeters(terrain.start);
+                if (terrain.type === 'snow') label = `❄️ Snow @ ${distanceM}m`;
+                else if (terrain.type === 'ice') label = `🧊 Ice @ ${distanceM}m`;
+                else if (terrain.type === 'lava') label = `🔥 Lava @ ${distanceM}m`;
+
+                previewStops.push({
+                    position: terrain.start + terrain.width / 2,
+                    label: label,
+                    className: className,
+                    priority: terrain.type === 'lava' ? 2 : 1
+                });
+            }
+
+            // Add Labubu highlights
+            for (const labubu of activeLabubus) {
+                const distanceM = pixelsToMeters(labubu.position);
+                const label = labubu.isLimited ? `⭐ SECRET @ ${distanceM}m!` : `🎁 Labubu @ ${distanceM}m`;
+                previewStops.push({
+                    position: labubu.position,
+                    label: label,
+                    className: labubu.isLimited ? 'secret' : 'labubu',
+                    priority: labubu.isLimited ? 3 : 1
+                });
+            }
+
+            // Sort by position
+            previewStops.sort((a, b) => a.position - b.position);
+
+            // Animate through preview
+            let currentStop = 0;
+
+            const animatePreview = () => {
+                if (currentStop >= previewStops.length) {
+                    // End preview - create persistent labels
+                    setTimeout(() => {
+                        previewOverlay.classList.remove('active');
+                        highlightsContainer.innerHTML = '';
+                        gameWorld.style.transform = 'translateX(0)';
+                        isPreviewPlaying = false;
+                        jumpBtn.disabled = isSleeping;
+
+                        // Create persistent distance labels
+                        createDistanceLabels();
+
+                        if (callback) callback();
+                    }, 500);
+                    return;
+                }
+
+                const stop = previewStops[currentStop];
+                const targetOffset = Math.max(0, stop.position - areaWidth * 0.5);
+
+                // Pan camera
+                gameWorld.style.transform = `translateX(-${targetOffset}px)`;
+
+                // Show highlight
+                const highlight = document.createElement('div');
+                highlight.className = `terrain-highlight ${stop.className}`;
+                highlight.textContent = stop.label;
+                highlight.style.left = `${stop.position}px`;
+                highlight.style.transform = 'translateX(-50%)';
+                highlightsContainer.appendChild(highlight);
+
+                // Update badge
+                if (stop.className === 'secret') {
+                    previewBadge.textContent = '⭐ SECRET EDITION!';
+                    previewBadge.style.background = 'linear-gradient(135deg, #2a2a2a, #1a1a1a)';
+                    previewBadge.style.color = 'gold';
+                } else if (stop.className === 'lava') {
+                    previewBadge.textContent = '⚠️ DANGER AHEAD!';
+                    previewBadge.style.background = 'linear-gradient(135deg, #FF4500, #CC0000)';
+                    previewBadge.style.color = 'white';
+                } else {
+                    previewBadge.textContent = '🔍 PREVIEW';
+                    previewBadge.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    previewBadge.style.color = 'white';
+                }
+
+                currentStop++;
+
+                // Time per stop - slower for better viewing
+                const stopTime = stop.priority === 3 ? 1500 : (stop.priority === 2 ? 1200 : 1000);
+                setTimeout(animatePreview, stopTime);
+            };
+
+            // Start with a longer pause
+            previewBadge.textContent = '🔍 PREVIEW';
+            previewBadge.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            previewBadge.style.color = 'white';
+
+            setTimeout(animatePreview, 800);
+        }
+
+        // Initialize a new jump session (spawn terrains, labubus, play preview)
+        function initializeJumpSession() {
+            // Hide any existing hints/summary
+            hideLabubuHint();
+            hideDistanceSummary();
+
+            // Generate terrain first
+            generateTerrains();
+
+            // Then spawn Labubus (they should avoid lava)
+            spawnLabubusWithTerrainAwareness();
+
+            // Play preview (createDistanceLabels is called at end of preview)
+            playPreview();
+        }
+
+        // Spawn Labubus avoiding lava patches
+        function spawnLabubusWithTerrainAwareness() {
+            labubuContainer.innerHTML = '';
+            activeLabubus = [];
+
+            const numLabubus = 2 + Math.floor(Math.random() * 3);
+
+            for (let i = 0; i < numLabubus; i++) {
+                // Try to find a non-lava position
+                let position;
+                let attempts = 0;
+                do {
+                    position = 150 + Math.floor(Math.random() * 1850);
+                    const terrain = getTerrainAt(position);
+                    // Prefer non-lava terrain, but allow after many attempts
+                    if (!terrain || terrain.type !== 'lava' || attempts > 10) break;
+                    attempts++;
+                } while (attempts <= 10);
+
+                const { colorClass, isLimited } = getRandomLabubuColor();
+
+                const labubu = document.createElement('div');
+                labubu.className = `labubu ${colorClass}`;
+                labubu.style.left = `${position}px`;
+                labubu.innerHTML = createLabubuHTML(isLimited);
+
+                labubuContainer.appendChild(labubu);
+                activeLabubus.push({
+                    element: labubu,
+                    position: position,
+                    isLimited: isLimited,
+                    colorClass: colorClass,
+                    collected: false
+                });
+            }
+        }
+
         // Show Labubu reveal animation
         function showLabubuReveal(labubu, callback) {
             const isLimited = labubu.isLimited;
-            const bonus = isLimited ? LABUBU_LIMITED_BONUS : LABUBU_REGULAR_BONUS;
+            const bonus = calculateLabubuBonus(labubu);
+            const distanceMeters = pixelsToMeters(labubu.position);
 
             // Check if Labubu was off-screen (beyond current camera view)
             const areaWidth = gameArea.offsetWidth;
@@ -1695,13 +2510,15 @@
                     labubuRevealTitle.innerHTML = '🌟 SECRET EDITION! 🌟<br>Black & Gold Labubu!';
                     labubuRevealTitle.style.color = 'gold';
                 } else {
-                    labubuRevealTitle.innerHTML = '🎉 You found a Labubu! 🎉';
+                    // Get color name from class
+                    const colorMatch = labubu.colorClass.match(/labubu-(\w+)/);
+                    const colorName = colorMatch ? colorMatch[1].charAt(0).toUpperCase() + colorMatch[1].slice(1) : '';
+                    labubuRevealTitle.innerHTML = `🎉 ${colorName} Labubu! 🎉<br><small style="font-size:0.6em">at ${distanceMeters}m</small>`;
                     labubuRevealTitle.style.color = 'white';
                 }
 
-                // Create the monster HTML with proper structure
-                const monsterClass = isLimited ? 'labubu-limited' : 'labubu-regular';
-                labubuRevealMonster.className = `labubu-reveal-monster ${monsterClass}`;
+                // Create the monster HTML with proper structure using the actual color class
+                labubuRevealMonster.className = `labubu-reveal-monster ${labubu.colorClass}`;
                 labubuRevealMonster.innerHTML = createLabubuHTML(isLimited);
 
                 labubuRevealBonus.textContent = `+${bonus} XP Bonus!`;
@@ -1857,18 +2674,18 @@
                 const card = document.createElement('div');
                 card.className = `skin-card ${isSelected ? 'selected' : ''} ${!isUnlocked ? 'locked' : ''}`;
 
-                let previewStyle = '';
+                let bgStyle = '';
                 if (skin.color === 'rainbow') {
-                    previewStyle = 'background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #9400D3); border-radius: 50%;';
+                    bgStyle = 'background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #9400D3);';
                 } else {
-                    previewStyle = `background: ${skin.color}; border-radius: 50%;`;
+                    bgStyle = `background: ${skin.color};`;
                 }
 
                 const cooldownReductionPercent = Math.round((1 - skin.cooldownReduction) * 100);
 
                 card.innerHTML = `
                     <div class="skin-preview">
-                        <div style="width: 50px; height: 40px; margin: 0 auto; ${previewStyle}"></div>
+                        <div class="skin-preview-circle" style="${bgStyle}"></div>
                     </div>
                     <div class="skin-name">${skin.name}</div>
                     <div class="skin-bonus">+${Math.round((skin.bonus - 1) * 100)}% Jump</div>
@@ -1898,7 +2715,7 @@
         let chargeInterval;
 
         function startCharging() {
-            if (gameState.isJumping || isSleeping) return;
+            if (gameState.isJumping || isSleeping || isPreviewPlaying) return;
             gameState.isCharging = true;
             gameState.power = 0;
 
@@ -1937,18 +2754,19 @@
             return Math.max(0.7, Math.min(1.3, multiplier));
         }
 
-        // Camera follow - keeps frog visible on screen
+        // Camera follow - keeps frog visible on screen (very zoomed out view)
         function updateCamera(frogX) {
             const areaWidth = gameArea.offsetWidth;
             const frogScreenPos = frogX + 50; // frog position from left edge
 
-            // On mobile (narrow screens), start following at 40% of screen
-            // On desktop, start following at 70% of screen
+            // Very zoomed out: only pan when frog is near edge
+            // This significantly reduces panning during big jumps
             const isMobile = areaWidth < 600;
-            const followThreshold = isMobile ? areaWidth * 0.4 : areaWidth * 0.7;
+            const followThreshold = isMobile ? areaWidth * 0.75 : areaWidth * 0.9;
 
             if (frogScreenPos > followThreshold) {
-                const offset = frogScreenPos - followThreshold;
+                // Pan very slowly - minimal movement
+                const offset = (frogScreenPos - followThreshold) * 0.5;
                 gameWorld.style.transform = `translateX(-${offset}px)`;
             } else {
                 gameWorld.style.transform = 'translateX(0)';
@@ -1994,61 +2812,211 @@
 
             setTimeout(() => {
                 frog.classList.remove('jumping');
-                frog.style.left = `${50 + pixelDistance}px`;
+                let frogPosition = 50 + pixelDistance;
+                frog.style.left = `${frogPosition}px`;
                 updateCamera(pixelDistance);
 
-                // Calculate base XP
-                let xpGained = Math.floor(totalDistance * 5);
+                // Check terrain at landing position
+                const landingTerrain = getTerrainAt(frogPosition);
+                let finalPosition = frogPosition;
+                let allCollectedLabubus = [];
+                let hitLava = false;
+                let slideDistance = 0;
 
-                // Check for new best
-                const isNewBest = totalDistance > gameState.bestJump;
-                if (isNewBest) {
-                    gameState.bestJump = totalDistance;
+                // Handle terrain effects
+                if (landingTerrain) {
+                    if (landingTerrain.type === 'snow') {
+                        // Snow: create splash effect
+                        createSnowSplash(frogPosition);
+                    } else if (landingTerrain.type === 'ice') {
+                        // Ice: slide forward
+                        slideDistance = pixelDistance * ICE_SLIDE_FACTOR;
+                        const slideEnd = calculateIceSlideEnd(frogPosition, slideDistance);
+
+                        // Check if slide ends on lava
+                        const slideEndTerrain = getTerrainAt(slideEnd);
+                        if (slideEndTerrain && slideEndTerrain.type === 'lava') {
+                            hitLava = true;
+                            finalPosition = slideEnd;
+                        } else {
+                            finalPosition = slideEnd;
+                        }
+
+                        // Collect Labubus during slide
+                        const slideCollected = checkLabubusDuringSlide(frogPosition, finalPosition);
+                        allCollectedLabubus = allCollectedLabubus.concat(slideCollected);
+
+                        // Animate the slide
+                        frog.classList.add('sliding');
+                        createIceTrail(frogPosition, finalPosition);
+
+                        const slideDuration = 500;
+                        const slideStartTime = Date.now();
+                        const animateSlide = () => {
+                            const elapsed = Date.now() - slideStartTime;
+                            const progress = Math.min(elapsed / slideDuration, 1);
+                            const currentPos = frogPosition + (finalPosition - frogPosition) * progress;
+                            frog.style.left = `${currentPos}px`;
+                            updateCamera(currentPos - 50);
+
+                            if (progress < 1) {
+                                requestAnimationFrame(animateSlide);
+                            } else {
+                                frog.classList.remove('sliding');
+                            }
+                        };
+                        animateSlide();
+
+                    } else if (landingTerrain.type === 'lava') {
+                        hitLava = true;
+                    }
                 }
 
-                // Check for Labubu collision
-                const frogPosition = 50 + pixelDistance;
-                const collectedLabubu = checkLabubuCollision(frogPosition);
+                // Also check initial landing for Labubu
+                const initialLabubu = checkLabubuCollision(frogPosition);
+                if (initialLabubu) {
+                    allCollectedLabubus.push(initialLabubu);
+                }
 
-                // Function to finish the jump (called after Labubu reveal if any)
-                const finishJump = (labubuBonus = 0) => {
-                    const totalXp = xpGained + labubuBonus;
+                // Delay for terrain effects
+                const effectDelay = landingTerrain?.type === 'ice' ? 600 : 100;
 
-                    // Add XP and check level up
-                    const oldLevel = gameState.level;
-                    gameState.xp += totalXp;
+                setTimeout(() => {
+                    // Calculate base XP
+                    let xpGained = Math.floor(totalDistance * 5);
+                    let xpPenalty = 0;
 
-                    while (gameState.xp >= getXpNeeded(gameState.level)) {
-                        gameState.xp -= getXpNeeded(gameState.level);
-                        gameState.level++;
+                    // Handle lava death
+                    if (hitLava) {
+                        frog.classList.add('burning');
+                        lavaDeathOverlay.classList.add('active');
+                        xpPenalty = LAVA_XP_PENALTY;
+
+                        setTimeout(() => {
+                            frog.classList.remove('burning');
+                            frog.style.filter = '';
+                            frog.style.transform = '';
+                            frog.style.opacity = '';
+                            lavaDeathOverlay.classList.remove('active');
+                        }, 600);
                     }
 
-                    const levelsGained = gameState.level - oldLevel;
+                    // Check for new best (use total distance including slide)
+                    const actualDistance = (finalPosition - 50) / 30;
+                    const isNewBest = actualDistance > gameState.bestJump && !hitLava;
+                    if (isNewBest) {
+                        gameState.bestJump = actualDistance;
+                    }
 
-                    // Check for skin unlocks
-                    const newUnlocks = [];
-                    skins.forEach(skin => {
-                        if (gameState.level >= skin.unlockLevel && !gameState.unlockedSkins.includes(skin.id)) {
-                            gameState.unlockedSkins.push(skin.id);
-                            newUnlocks.push(skin.name);
+                    // Calculate total Labubu bonus
+                    let totalLabubuBonus = 0;
+                    for (const labubu of allCollectedLabubus) {
+                        totalLabubuBonus += calculateLabubuBonus(labubu);
+                    }
+
+                    // Function to finish the jump
+                    const finishJump = () => {
+                        let finalXp = xpGained + totalLabubuBonus - xpPenalty;
+                        finalXp = Math.max(0, finalXp); // Don't go negative
+
+                        // Add XP and check level up
+                        const oldLevel = gameState.level;
+                        gameState.xp += finalXp;
+
+                        while (gameState.xp >= getXpNeeded(gameState.level)) {
+                            gameState.xp -= getXpNeeded(gameState.level);
+                            gameState.level++;
                         }
-                    });
 
-                    // Show result popup
-                    showResult(totalDistance, totalXp, levelsGained, newUnlocks, isNewBest, labubuBonus);
+                        const levelsGained = gameState.level - oldLevel;
 
-                    saveGame();
-                    updateUI();
-                };
+                        // Check for skin unlocks
+                        const newUnlocks = [];
+                        skins.forEach(skin => {
+                            if (gameState.level >= skin.unlockLevel && !gameState.unlockedSkins.includes(skin.id)) {
+                                gameState.unlockedSkins.push(skin.id);
+                                newUnlocks.push(skin.name);
+                            }
+                        });
 
-                if (collectedLabubu) {
-                    // Show Labubu reveal, then finish jump
-                    showLabubuReveal(collectedLabubu, finishJump);
-                } else {
-                    // No Labubu, finish immediately
-                    finishJump(0);
-                }
+                        // Show result popup with terrain info
+                        showResultWithTerrain(actualDistance, finalXp, levelsGained, newUnlocks, isNewBest, totalLabubuBonus, hitLava, xpPenalty, slideDistance > 0, allCollectedLabubus.length);
+
+                        saveGame();
+                        updateUI();
+                    };
+
+                    // Show Labubu reveals if collected
+                    if (allCollectedLabubus.length > 0) {
+                        // Show reveal for first collected (most valuable)
+                        const mostValuable = allCollectedLabubus.reduce((best, current) =>
+                            calculateLabubuBonus(current) > calculateLabubuBonus(best) ? current : best
+                        );
+                        showLabubuReveal(mostValuable, () => finishJump());
+                    } else {
+                        finishJump();
+                    }
+                }, effectDelay);
             }, 1000);
+        }
+
+        // Show result with terrain information
+        function showResultWithTerrain(distance, xp, levelsGained, newUnlocks, isNewBest, labubuBonus, hitLava, lavaPenalty, didSlide, labubuCount) {
+            resultDistance.textContent = distance.toFixed(1);
+
+            // Build XP display
+            let xpHtml = '';
+            const baseXp = xp - labubuBonus + lavaPenalty;
+
+            if (labubuBonus > 0 || lavaPenalty > 0 || didSlide) {
+                xpHtml = `${baseXp}`;
+                if (labubuBonus > 0) {
+                    xpHtml += ` <span style="color: #FFD700;">+${labubuBonus} 🎁${labubuCount > 1 ? ` (x${labubuCount})` : ''}</span>`;
+                }
+                if (lavaPenalty > 0) {
+                    xpHtml += ` <span style="color: #FF4500;">-${lavaPenalty} 🔥</span>`;
+                }
+                if (didSlide) {
+                    xpHtml += ` <span style="color: #87CEEB;">🧊</span>`;
+                }
+            } else {
+                xpHtml = `${xp}`;
+            }
+            resultXp.innerHTML = xpHtml;
+
+            if (levelsGained > 0) {
+                levelUpMsg.style.display = 'block';
+                levelUpMsg.textContent = `🎉 LEVEL UP! Now Level ${gameState.level}!`;
+            } else {
+                levelUpMsg.style.display = 'none';
+            }
+
+            if (newUnlocks.length > 0) {
+                unlockMsg.style.display = 'block';
+                unlockMsg.textContent = `🎨 Unlocked: ${newUnlocks.join(', ')}!`;
+            } else {
+                unlockMsg.style.display = 'none';
+            }
+
+            // Set title based on outcome
+            if (hitLava) {
+                resultPopup.querySelector('h2').textContent = '🔥 Burned!';
+            } else if (isNewBest) {
+                resultPopup.querySelector('h2').textContent = '🏆 New Record!';
+            } else if (labubuBonus >= 300) {
+                resultPopup.querySelector('h2').textContent = '🌟 RARE FIND!';
+            } else if (labubuCount > 1) {
+                resultPopup.querySelector('h2').textContent = '🎁 Multi-Catch!';
+            } else if (labubuBonus > 0) {
+                resultPopup.querySelector('h2').textContent = '🎁 Labubu Bonus!';
+            } else if (didSlide) {
+                resultPopup.querySelector('h2').textContent = '🧊 Ice Slide!';
+            } else {
+                resultPopup.querySelector('h2').textContent = 'Great Jump!';
+            }
+
+            overlay.style.display = 'block';
+            resultPopup.style.display = 'block';
         }
 
         // Show result popup
@@ -2079,7 +3047,7 @@
 
             if (isNewBest) {
                 resultPopup.querySelector('h2').textContent = '🏆 New Record!';
-            } else if (labubuBonus >= LABUBU_LIMITED_BONUS) {
+            } else if (labubuBonus >= 300) {
                 resultPopup.querySelector('h2').textContent = '🌟 RARE FIND!';
             } else if (labubuBonus > 0) {
                 resultPopup.querySelector('h2').textContent = '🎁 Labubu Bonus!';
@@ -2103,10 +3071,9 @@
             powerPercent.textContent = '0';
             gameState.power = 0;
             gameState.isJumping = false;
-            jumpBtn.disabled = false;
 
-            // Spawn new Labubus for next jump
-            spawnLabubus();
+            // Initialize new jump session (terrains, labubus, preview)
+            initializeJumpSession();
         }
 
         // Save game
@@ -2153,7 +3120,7 @@
         loadGame();
         updateAwakeDisplay();
         startAwakeTimer();
-        spawnLabubus();
+        initializeJumpSession();
     </script>
 </body>
 </html>
